@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
 
 export type PosterCardAccent =
@@ -42,34 +42,61 @@ export function PosterCard({
 }: PosterCardProps) {
   const tilt = index % 2 === 0 ? -1.5 : 1.2;
 
+  const cardVariants: Variants = {
+    hidden: { opacity: 0, y: 52, rotate: tilt * 2.2, scale: 0.93 },
+    show: {
+      opacity: 1,
+      y: 0,
+      rotate: tilt,
+      scale: 1,
+      transition: { type: "spring", stiffness: 260, damping: 26 },
+    },
+  };
+
   return (
     <motion.article
-      initial={{ opacity: 0, y: 36, rotate: tilt * 2 }}
-      whileInView={{ opacity: 1, y: 0, rotate: tilt }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ type: "spring", stiffness: 260, damping: 26, delay: index * 0.06 }}
+      variants={cardVariants}
       whileHover={{
-        y: -10,
-        rotate: tilt + (index % 2 === 0 ? -2 : 2),
+        y: -12,
+        rotate: tilt + (index % 2 === 0 ? -2.5 : 2.5),
         scale: 1.02,
+        boxShadow: "8px 10px 0 #0a0a0a",
       }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ type: "spring", stiffness: 380, damping: 22 }}
       className={`group relative flex flex-col overflow-hidden rounded-2xl border-[3px] border-arena-ink bg-arena-cream shadow-sticker ${className}`}
     >
+      <span
+        className="absolute right-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-lg border-[3px] border-arena-ink bg-white font-condensed text-sm font-bold tabular-nums text-arena-ink shadow-sticker-sm"
+        aria-hidden
+      >
+        {String(index + 1).padStart(2, "0")}
+      </span>
       <div className="relative aspect-[4/3] w-full overflow-hidden border-b-[3px] border-arena-ink">
-        <Image
-          src={imageSrc}
-          alt={imageAlt}
-          fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, 33vw"
-        />
+        <motion.div
+          className="absolute inset-0"
+          whileHover={{ scale: 1.05 }}
+          transition={{ type: "spring", stiffness: 300, damping: 22 }}
+        >
+          <Image
+            src={imageSrc}
+            alt={imageAlt}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 33vw"
+          />
+        </motion.div>
         <div
-          className={`absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-black/55 to-transparent`}
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-linear-to-t from-black/60 via-black/20 to-transparent"
+          aria-hidden
+        />
+        <motion.div
+          className="pointer-events-none absolute inset-0 bg-linear-to-tr from-arena-yellow/0 via-transparent to-arena-pink/15 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           aria-hidden
         />
       </div>
       <div
-        className={`flex flex-1 flex-col gap-1 border-t-0 px-4 py-4 ${accentBg[accent]}`}
+        className={`relative flex flex-1 flex-col gap-1 border-t-0 px-4 py-4 ${accentBg[accent]}`}
       >
         <h3 className="font-display text-3xl uppercase leading-none tracking-wide text-arena-ink md:text-4xl">
           {title}
