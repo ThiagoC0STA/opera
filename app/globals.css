@@ -1,26 +1,88 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Matches SiteHeader bar + safe area — hero height = remaining viewport */
+  --site-header-height: calc(4rem + env(safe-area-inset-top, 0px));
+  --background: #0f0f12;
+  --foreground: #fafafa;
+  --arena-green: #00a651;
+  --arena-yellow: #ffcc00;
+  --arena-blue: #0057b7;
+  --arena-red: #e63946;
+  --arena-pink: #ff2d92;
+  --arena-cream: #fff8e7;
+  --sticker-shadow: 6px 6px 0 #0a0a0a;
+  --sticker-shadow-sm: 4px 4px 0 #0a0a0a;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-arena-green: var(--arena-green);
+  --color-arena-yellow: var(--arena-yellow);
+  --color-arena-blue: var(--arena-blue);
+  --color-arena-red: var(--arena-red);
+  --color-arena-pink: var(--arena-pink);
+  --color-arena-cream: var(--arena-cream);
+  --color-arena-ink: #0a0a0a;
+  --font-sans: var(--font-f-body), system-ui, sans-serif;
+  --font-display: var(--font-f-display), system-ui, sans-serif;
+  --font-condensed: var(--font-f-condensed), system-ui, sans-serif;
+  --font-playful: var(--font-f-playful), system-ui, cursive;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (min-width: 640px) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --site-header-height: calc(4.5rem + env(safe-area-inset-top, 0px));
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+.text-outline {
+  -webkit-text-stroke: 2px var(--arena-ink);
+  paint-order: stroke fill;
+}
+
+.text-outline-light {
+  -webkit-text-stroke: 2px rgba(250, 250, 250, 0.9);
+  paint-order: stroke fill;
+}
+
+.bg-dots {
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.12) 1px,
+    transparent 1px
+  );
+  background-size: 14px 14px;
+}
+
+.bg-diagonal-stripes {
+  background-image: repeating-linear-gradient(
+    -12deg,
+    rgba(255, 255, 255, 0.04) 0,
+    rgba(255, 255, 255, 0.04) 2px,
+    transparent 2px,
+    transparent 10px
+  );
+}
+
+.shadow-sticker {
+  box-shadow: var(--sticker-shadow);
+}
+
+.shadow-sticker-sm {
+  box-shadow: var(--sticker-shadow-sm);
+}
+
+/* Subtle film grain for poster-style heroes */
+.hero-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
+  mix-blend-mode: overlay;
 }
