@@ -12,6 +12,7 @@ export function FinalCtaSection() {
 
   return (
     <Section
+      id="cta"
       variant="blue"
       className="overflow-visible border-b-[3px] border-arena-ink"
       innerClassName="relative py-24 sm:py-28"

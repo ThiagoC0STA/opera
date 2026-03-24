@@ -52,6 +52,12 @@ export function SiteHeader() {
             <Link href="#countdown" className={navLinkClass}>
               Contagem
             </Link>
+            <Link href="#local" className={navLinkClass}>
+              Local
+            </Link>
+            <Link href="#dicas" className={navLinkClass}>
+              Dicas
+            </Link>
           </nav>
 
           <Button

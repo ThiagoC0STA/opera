@@ -5,6 +5,8 @@ import { ExperienceSection } from "@/sections/ExperienceSection";
 import { FinalCtaSection } from "@/sections/FinalCtaSection";
 import { HeroSection } from "@/sections/HeroSection";
 import { LineupSection } from "@/sections/LineupSection";
+import { LocalSection } from "@/sections/LocalSection";
+import { TipsSection } from "@/sections/TipsSection";
 
 export default function Home() {
   return (
@@ -15,6 +17,8 @@ export default function Home() {
         <LineupSection />
         <ExperienceSection />
         <CountdownSection />
+        <LocalSection />
+        <TipsSection />
         <FinalCtaSection />
       </main>
       <SiteFooter />
