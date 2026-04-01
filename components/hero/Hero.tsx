@@ -33,14 +33,15 @@ export function Hero() {
       <HeroDecorLayer />
       <HeroBottomCurve />
 
-      <div className="relative z-10 flex w-full flex-col items-center px-4 pt-[clamp(0.5rem,2vw,1.25rem)] pb-[clamp(4rem,8vw,6rem)] sm:px-6 lg:px-10">
+      <div className="relative z-10 flex w-full flex-col items-center px-3 pt-[clamp(0.5rem,2vw,1.25rem)] pb-[clamp(5.5rem,10vw,6rem)] sm:px-6 sm:pb-[clamp(4rem,8vw,6rem)] lg:px-10">
         <motion.div
-          className="relative z-20 mx-auto flex w-full max-w-[min(480px,calc(100vw-2rem))] flex-col items-center text-center sm:max-w-[600px]"
+          className="relative z-20 flex w-full flex-col items-center text-center"
           variants={stagger}
           initial="initial"
           animate="animate"
         >
           <motion.div
+            className="w-full max-sm:-mx-3 max-sm:px-3 sm:px-0"
             variants={rise}
             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
           >
@@ -48,7 +49,7 @@ export function Hero() {
           </motion.div>
 
           <motion.div
-            className="flex w-full flex-col items-center mt-12"
+            className="mx-auto mt-5 flex w-full max-w-[min(480px,calc(100vw-1.5rem))] flex-col items-center sm:mt-12 sm:max-w-[573px]"
             variants={rise}
             transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
           >
@@ -63,12 +64,12 @@ export function Hero() {
 
             <div className="mt-[clamp(0.5rem,2vw,1rem)] flex w-full flex-col items-center">
               <HeroDateBadge />
-              <p className="mb-[min(3.19vw,46px)] max-w-full font-alexandria text-[min(0.76vw,11px)] font-bold uppercase leading-none tracking-[0.28em] text-arena-ink">
+              <p className="mb-3 max-w-full px-1 font-alexandria text-[clamp(10px,2.35vw,11px)] font-bold uppercase leading-snug tracking-[0.22em] text-arena-ink sm:mb-[min(3.19vw,46px)] sm:px-0 sm:leading-none sm:tracking-[0.28em]">
                 Evento restrito para maiores de 18 anos
               </p>
             </div>
 
-            <div className="mb-[min(3.19vw,46px)] flex w-full justify-center">
+            <div className="mb-4 flex w-full justify-center sm:mb-[min(3.19vw,46px)]">
               <HeroPrimaryCta href="#cta" />
             </div>
 

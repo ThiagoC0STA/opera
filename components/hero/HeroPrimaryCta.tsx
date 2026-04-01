@@ -29,7 +29,7 @@ export function HeroPrimaryCta({ href = "#cta" }: HeroPrimaryCtaProps) {
     >
       <Link
         href={href}
-        className="box-border flex h-[min(4.79vw,69px)] w-[323px] items-center justify-center rounded-[20px] border-2 border-[#232323] bg-[#FFBE3B] text-inherit no-underline uppercase leading-none transition-[filter] hover:brightness-[0.97] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#232323]"
+        className="box-border flex h-[min(3.25rem,69px)] w-full max-w-[min(323px,calc(100vw-2rem))] items-center justify-center rounded-[16px] border-2 border-[#232323] bg-[#FFBE3B] px-3 text-inherit no-underline uppercase leading-none transition-[filter] hover:brightness-[0.97] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#232323] sm:h-[min(4.79vw,69px)] sm:max-w-[323px] sm:rounded-[20px] sm:px-0"
       >
         <ShadowText
           className="header-nav-font header-nav-font--cta"

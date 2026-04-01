@@ -16,9 +16,9 @@ export default function Home() {
       <SiteHeader />
       <main className="flex-1 bg-arena-cream">
         <HeroSection />
+        <CountdownSection />
         <LineupSection />
         <ExperienceSection />
-        <CountdownSection />
         <LocalSection />
         <TipsSection />
         <FinalCtaSection />

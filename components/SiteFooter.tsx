@@ -22,14 +22,7 @@ export function SiteFooter() {
           Arena Ópera
         </motion.p>
         <p className="max-w-md text-center text-sm text-white/60 sm:text-left">
-          © {new Date().getFullYear()} Arena Ópera. Landing de demonstração
-          <Link
-            href="https://unsplash.com"
-            className="underline decoration-arena-yellow decoration-2 underline-offset-2 transition-colors hover:text-white"
-          >
-            Unsplash
-          </Link>
-          .
+          © {new Date().getFullYear()} Arena Ópera.
         </p>
       </motion.div>
     </footer>

@@ -5,8 +5,8 @@
   --site-header-height: calc(87px + env(safe-area-inset-top, 0px));
   --background: #0f0f12;
   --foreground: #fafafa;
-  --arena-green: #00a651;
-  --arena-yellow: #ffcc00;
+  --arena-green: #36A64E;
+  --arena-yellow: #ffbe3b;
   --arena-blue: #0057b7;
   --arena-red: #e63946;
   --arena-pink: #ff2d92;
@@ -14,8 +14,8 @@
   /* Home hero / header (Brazil WC theme) */
   --arena-header-green: #31613d;
   --arena-cta-orange: #ffb84d;
-  --arena-hero-beige: #FFEBD5;
-  --arena-date-green: #36A64E;
+  --arena-hero-beige: #ffebd5;
+  --arena-date-green: #36a64e;
   --sticker-shadow: 6px 6px 0 #0a0a0a;
   --sticker-shadow-sm: 4px 4px 0 #0a0a0a;
   --sticker-shadow-lg: 8px 8px 0 #0a0a0a;
@@ -46,6 +46,7 @@
 body, html {
   background: #FFEBD5;
   color: var(--foreground);
+  overflow-x: hidden;
 }
 
 .text-outline {
@@ -109,6 +110,7 @@ body, html {
     letter-spacing: -0.02em;
     text-align: center;
     vertical-align: middle;
+    text-rendering: geometricPrecision;
     -webkit-text-stroke: 0.74px #232323;
     paint-order: stroke fill;
     text-shadow:
@@ -142,5 +144,24 @@ body, html {
       0.65px -0.65px 0 #2a5c38,
       -0.65px -0.65px 0 #2a5c38,
       2px 2.5px 0 #1a3d24;
+  }
+}
+
+/* Slightly smaller nav glyphs on narrow screens (single-row header) */
+@media (max-width: 639px) {
+  .site-header-shell .header-nav-font {
+    font-size: clamp(16px, 4.5vw, 22px);
+    line-height: 1.2;
+    -webkit-text-stroke: 0.5px #232323;
+    text-shadow:
+      0.5px 0 0 #232323,
+      -0.5px 0 0 #232323,
+      0 0.5px 0 #232323,
+      0 -0.5px 0 #232323,
+      0.5px 0.5px 0 #232323,
+      -0.5px 0.5px 0 #232323,
+      0.5px -0.5px 0 #232323,
+      -0.5px -0.5px 0 #232323,
+      -1.1px 1.25px 0 #000000;
   }
 }

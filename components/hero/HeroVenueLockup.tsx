@@ -14,7 +14,7 @@ export function HeroVenueLockup() {
         width={182}
         height={63}
         unoptimized
-        className="h-auto w-[min(12.6vw,182px)] object-contain"
+        className="h-auto w-[min(52vw,182px)] object-contain sm:w-[min(12.6vw,182px)]"
       />
     </div>
   );

@@ -9,7 +9,7 @@ import Image from "next/image";
 export function HeaderCornerPlants() {
   return (
     <div
-      className="pointer-events-none absolute inset-x-0 top-11 z-110 h-[min(46vh,320px)] overflow-visible"
+      className="pointer-events-none absolute inset-x-0 top-11 z-110 hidden h-[min(46vh,320px)] overflow-visible sm:block"
       aria-hidden
     >
       <Image
