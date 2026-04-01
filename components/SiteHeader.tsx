@@ -14,7 +14,7 @@ export function SiteHeader() {
     <div>
       <div className="site-header-shell relative bg-arena-header-green pt-[env(safe-area-inset-top,0px)] shadow-[0_10px_36px_rgba(0,0,0,0.28)] sm:pt-0">
         <div className="mx-auto flex h-[60px] md:h-[87px] max-w-6xl flex-row flex-nowrap items-center justify-between md:justify-center gap-2 px-2 sm:gap-8 sm:px-6 md:gap-12 lg:px-8">
-          <Link href="#lineup" className={navLinkClass}>
+          <Link href="#atracoes" className={navLinkClass}>
             <ShadowText className="header-nav-font">Atrações</ShadowText>
           </Link>
           <Link href="#local" className={navLinkClass}>

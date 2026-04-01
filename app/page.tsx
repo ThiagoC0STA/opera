@@ -5,7 +5,7 @@ import { CountdownSection } from "@/sections/CountdownSection";
 import { ExperienceSection } from "@/sections/ExperienceSection";
 import { FinalCtaSection } from "@/sections/FinalCtaSection";
 import { HeroSection } from "@/sections/HeroSection";
-import { LineupSection } from "@/sections/LineupSection";
+import { AtracoesSection } from "@/sections/AtracoesSection";
 import { LocalSection } from "@/sections/LocalSection";
 import { TipsSection } from "@/sections/TipsSection";
 
@@ -17,10 +17,10 @@ export default function Home() {
       <main className="flex-1 bg-arena-cream">
         <HeroSection />
         <CountdownSection />
-        <LineupSection />
+        <AtracoesSection />
         {/* <ExperienceSection /> */}
         <LocalSection />
-        <TipsSection />
+        {/* <TipsSection /> */}
         <FinalCtaSection />
       </main>
       <SiteFooter />

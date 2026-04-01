@@ -129,34 +129,6 @@ export const DECOR_FINAL_CTA: SiteDecorPlacement[] = [
   },
 ];
 
-/** Local — cream, sem bola */
-export const DECOR_LOCAL: SiteDecorPlacement[] = [
-  {
-    id: "nuvem-tr",
-    src: e2("nuvem.svg"),
-    alt: "",
-    wrapperClass: "-right-[3%] top-[8%] max-sm:hidden",
-    maxWidthClass: "w-32 sm:w-40",
-    delay: 0,
-  },
-  {
-    id: "sun2-bl",
-    src: e2("sun2.svg"),
-    alt: "",
-    wrapperClass: "-left-[4%] bottom-[6%] max-md:hidden",
-    maxWidthClass: "w-28 sm:w-36",
-    delay: 0.08,
-  },
-  {
-    id: "sun-tr",
-    src: e2("sun.svg"),
-    alt: "",
-    wrapperClass: "left-[6%] -top-[1%] max-sm:hidden",
-    maxWidthClass: "w-24 sm:w-32",
-    delay: 0.12,
-  },
-];
-
 /** Dicas — fundo escuro: uma bola pequena + formas leves */
 export const DECOR_TIPS: SiteDecorPlacement[] = [
   {

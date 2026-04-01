@@ -73,7 +73,7 @@ export function FinalCtaSection() {
             className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row"
             variants={fadeUp}
           >
-            <Button href="#lineup" variant="primary" size="lg">
+            <Button href="#atracoes" variant="primary" size="lg">
               Garantir ingresso
             </Button>
             <Button
