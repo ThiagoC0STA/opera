@@ -7,7 +7,7 @@ import Image from "next/image";
  */
 export function HeroVenueLockup() {
   return (
-    <div className="flex w-full justify-center">
+    <div className="flex w-full justify-center mt-4 -mb-4 md:mb-0 md:mt-0">
       <Image
         src="/final-elements/opera-concept.svg"
         alt="Ópera Concept Hall"

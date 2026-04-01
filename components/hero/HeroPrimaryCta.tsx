@@ -7,7 +7,8 @@ import { HEADER_GLYPH_STYLE, ShadowText } from "@/components/ShadowText";
 
 const ctaGlyphStyle: CSSProperties = {
   ...HEADER_GLYPH_STYLE,
-  fontSize: "min(2.43vw, 35px)",
+  /** Floor ~20px on narrow phones; keeps desktop cap at 35px (2.43vw was ~9px on 375px). */
+  fontSize: "clamp(1.25rem, calc(2.43vw + 0.875rem), 35px)",
   lineHeight: 1,
 };
 
@@ -29,7 +30,7 @@ export function HeroPrimaryCta({ href = "#cta" }: HeroPrimaryCtaProps) {
     >
       <Link
         href={href}
-        className="box-border flex h-[min(3.25rem,69px)] w-full max-w-[min(323px,calc(100vw-2rem))] items-center justify-center rounded-[16px] border-2 border-[#232323] bg-[#FFBE3B] px-3 text-inherit no-underline uppercase leading-none transition-[filter] hover:brightness-[0.97] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#232323] sm:h-[min(4.79vw,69px)] sm:max-w-[323px] sm:rounded-[20px] sm:px-0"
+        className="box-border flex min-h-[3.5rem] h-[min(3.5rem,69px)] w-full max-w-[min(323px,calc(100vw-2rem))] items-center justify-center rounded-[16px] border-2 border-[#232323] bg-[#FFBE3B] px-3 py-2 text-inherit no-underline uppercase leading-none transition-[filter] hover:brightness-[0.97] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#232323] sm:h-[min(4.79vw,69px)] sm:min-h-0 sm:max-w-[323px] sm:rounded-[20px] sm:py-0 sm:px-0"
       >
         <ShadowText
           className="header-nav-font header-nav-font--cta"
