@@ -8,22 +8,16 @@ const ballClass =
   "h-12 w-12 shrink-0 sm:h-[min(3.2vw,46px)] sm:w-[min(3.2vw,46px)]";
 
 /**
- * Budweiser lockup — ball · badge · ball; macaws flank this row on mobile only
- * (desktop macaws stay in {@link HeroDecorLayer}).
+ * Budweiser lockup — ball · badge · ball. On small screens the row is centered;
+ * macaws render beside the date badge in {@link HeroDateBadge} (desktop macaws
+ * stay in {@link HeroDecorLayer}).
  */
 export function HeroSponsorStrip() {
   return (
-    <div className="mb-[clamp(0.5rem,3vw,1.5rem)] sm:mb-[clamp(0.75rem,3vw,1.5rem)]">
-      <div className="mx-auto flex max-w-full items-end justify-center gap-2 sm:max-w-none sm:items-center sm:gap-[clamp(10px,min(2.78vw,40px),40px)]">
-        <Image
-          src={`${ASSET}/arara.png`}
-          alt=""
-          width={646}
-          height={678}
-          className="h-[5.75rem] w-auto min-w-0 max-w-[min(36vw,148px)] shrink translate-x-4 translate-y-5 object-contain object-left sm:hidden"
-          unoptimized
-        />
-        <div className="flex items-center gap-5 sm:contents sm:gap-0">
+    <div className="mb-[clamp(0.5rem,3vw,1.5rem)] sm:mb-[clamp(0.75rem,3vw,1.5rem)] mt-4 md:mt-0">
+      {/* Mobile: balls + Budweiser only, centered. Macaws sit beside the date badge (HeroDateBadge). */}
+      <div className="mx-auto flex w-full max-w-full items-center justify-center sm:max-w-none sm:gap-[clamp(10px,min(2.78vw,40px),40px)]">
+        <div className="flex items-center justify-center gap-5 sm:contents sm:gap-0">
           <Image
             src={`${ASSET}/ball.svg`}
             alt=""
@@ -51,14 +45,6 @@ export function HeroSponsorStrip() {
             unoptimized
           />
         </div>
-        <Image
-          src={`${ASSET}/arara.png`}
-          alt=""
-          width={646}
-          height={678}
-          className="h-[5.75rem] w-auto min-w-0 max-w-[min(36vw,148px)] shrink -translate-x-4 translate-y-5 scale-x-[-1] object-contain object-right sm:hidden"
-          unoptimized
-        />
       </div>
     </div>
   );
