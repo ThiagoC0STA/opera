@@ -6,6 +6,7 @@ import { Section } from "@/components/Section";
 import { Badge } from "@/components/Badge";
 import { SectionDecor } from "@/components/elements/SectionDecor";
 import { DECOR_COUNTDOWN } from "@/components/elements/siteDecorPlacements";
+import { WorldCupsTimelineStrip } from "@/components/local/WorldCupsTimelineStrip";
 import { EASE_OUT, fadeUp, sectionStagger } from "@/components/motion/presets";
 
 function easeOutCubic(t: number) {
@@ -171,6 +172,8 @@ export function CountdownSection() {
             />
           </motion.div>
         </motion.div>
+
+        <WorldCupsTimelineStrip />
       </div>
     </Section>
   );

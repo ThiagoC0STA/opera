@@ -2,6 +2,10 @@
 
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
+import {
+  PLAYFUL_SHADOW_TEXT_STYLE,
+  ShadowText,
+} from "@/components/ShadowText";
 
 type BadgeTone = "yellow" | "green" | "blue" | "pink" | "red" | "cream";
 
@@ -31,7 +35,7 @@ export function Badge({
   immediate = false,
 }: BadgeProps) {
   const motionClass =
-    "inline-block rounded-lg border-[3px] px-3 py-1 font-playful text-sm uppercase tracking-wide shadow-sticker-sm md:text-base";
+    "inline-flex items-center justify-center rounded-lg border-[3px] px-3 py-1 text-sm uppercase tracking-wide shadow-sticker-sm md:text-base";
 
   if (immediate) {
     return (
@@ -42,7 +46,7 @@ export function Badge({
         whileHover={{ scale: 1.06, rotate: rotate + 3 }}
         className={`${motionClass} ${toneClasses[tone]} ${className}`}
       >
-        {children}
+        <ShadowText style={PLAYFUL_SHADOW_TEXT_STYLE}>{children}</ShadowText>
       </motion.span>
     );
   }
@@ -56,7 +60,7 @@ export function Badge({
       whileHover={{ scale: 1.06, rotate: rotate + 3 }}
       className={`${motionClass} ${toneClasses[tone]} ${className}`}
     >
-      {children}
+      <ShadowText style={PLAYFUL_SHADOW_TEXT_STYLE}>{children}</ShadowText>
     </motion.span>
   );
 }

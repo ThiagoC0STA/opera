@@ -1,6 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
+import {
+  PLAYFUL_SHADOW_TEXT_STYLE,
+  ShadowText,
+} from "@/components/ShadowText";
 import { EASE_OUT } from "@/components/motion/presets";
 
 /** WGS84 — Ópera de Arame (Parque das Pedreiras), Curitiba */
@@ -52,9 +56,14 @@ export function OperaArameMapEmbed() {
           href={GOOGLE_DIRECTIONS_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-4 inline-flex items-center gap-2 rounded-xl border-2 border-arena-ink bg-arena-yellow px-4 py-2.5 font-condensed text-sm font-semibold uppercase tracking-wide text-arena-ink shadow-sticker-sm transition-[filter] hover:brightness-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-arena-ink"
+          className="mt-4 inline-flex items-center justify-center gap-2 rounded-xl border-2 border-arena-ink bg-arena-yellow px-4 py-2.5 text-md text-white shadow-sticker-sm transition-[filter] hover:brightness-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-arena-ink"
         >
-          Abrir no Google Maps
+          <ShadowText
+            className="uppercase"
+            style={PLAYFUL_SHADOW_TEXT_STYLE}
+          >
+            Abrir no Google Maps
+          </ShadowText>
         </a>
       </div>
     </div>
