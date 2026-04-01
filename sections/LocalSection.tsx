@@ -3,15 +3,10 @@
 import { motion } from "framer-motion";
 import { Section } from "@/components/Section";
 import { Badge } from "@/components/Badge";
+import { OperaArameMapEmbed } from "@/components/local/OperaArameMapEmbed";
 import { SectionDecor } from "@/components/elements/SectionDecor";
 import { DECOR_LOCAL } from "@/components/elements/siteDecorPlacements";
-import { EASE_OUT, fadeUp, sectionStagger } from "@/components/motion/presets";
-
-const bullets = [
-  "Curitiba — região central, fácil de achar com mapas.",
-  "Estacionamento e bicicletário perto do acesso principal.",
-  "Transporte público: linhas que passam pela área do evento.",
-];
+import { fadeUp, sectionStagger } from "@/components/motion/presets";
 
 export function LocalSection() {
   return (
@@ -22,7 +17,7 @@ export function LocalSection() {
       decor={<SectionDecor items={DECOR_LOCAL} />}
     >
       <motion.div
-        className="grid gap-10 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-14"
+        className="grid gap-10 lg:grid-cols-[1fr_1.05fr] lg:items-start lg:gap-14"
         variants={sectionStagger}
         initial="hidden"
         whileInView="show"
@@ -38,44 +33,14 @@ export function LocalSection() {
           </h2>
           <p className="mt-6 max-w-lg font-sans text-base text-arena-ink/85 sm:text-lg">
             Tudo pensado para você chegar tranquilo, circular com segurança e
-            aproveitar a noite inteira sem fricção.
+            aproveitar a noite inteira sem fricção. O palco é a Ópera de Arame,
+            ícone de Curitiba — região central, com estacionamento, bicicletário
+            e linhas de transporte público na área.
           </p>
         </motion.div>
 
-        <motion.div
-          variants={fadeUp}
-          className="relative overflow-hidden rounded-3xl border-[3px] border-arena-ink bg-white/60 p-6 shadow-sticker-sm sm:p-8"
-        >
-          <motion.div
-            className="absolute right-0 top-0 h-24 w-24 rounded-bl-full bg-arena-yellow/35"
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, ease: EASE_OUT, delay: 0.2 }}
-            aria-hidden
-          />
-          <p className="font-condensed text-xs uppercase tracking-[0.25em] text-arena-ink/60">
-            Acesso
-          </p>
-          <ul className="mt-5 space-y-4 font-sans text-arena-ink">
-            {bullets.map((line) => (
-              <li
-                key={line}
-                className="flex gap-3 border-l-4 border-arena-blue pl-4 text-base leading-snug sm:text-lg"
-              >
-                {line}
-              </li>
-            ))}
-          </ul>
-          <motion.p
-            className="mt-8 rounded-xl border-[3px] border-dashed border-arena-ink/30 bg-arena-cream/80 px-4 py-3 text-center text-sm text-arena-ink/70"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.25, duration: 0.45 }}
-          >
-            Mapa e endereço exato serão divulgados na confirmação do ingresso.
-          </motion.p>
+        <motion.div variants={fadeUp}>
+          <OperaArameMapEmbed />
         </motion.div>
       </motion.div>
     </Section>

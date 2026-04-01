@@ -40,7 +40,6 @@ export function LineupSection() {
     <Section
       id="lineup"
       variant="cream"
-      className="border-b-[3px] border-arena-ink"
       decor={<SectionDecor items={DECOR_LINEUP} />}
     >
       <motion.div
