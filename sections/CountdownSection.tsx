@@ -1,179 +1,176 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import { motion, useInView, type Variants } from "framer-motion";
+import { useEffect, useMemo, useState } from "react";
+import type { CSSProperties } from "react";
+import Link from "next/link";
+import { motion, type Variants } from "framer-motion";
 import { Section } from "@/components/Section";
-import { Badge } from "@/components/Badge";
-import { SectionDecor } from "@/components/elements/SectionDecor";
-import { DECOR_COUNTDOWN } from "@/components/elements/siteDecorPlacements";
-import { WorldCupsTimelineStrip } from "@/components/local/WorldCupsTimelineStrip";
+import { HEADER_GLYPH_STYLE, ShadowText } from "@/components/ShadowText";
+import { CountdownSectionDecor } from "@/components/local/countdown/CountdownSectionDecor";
 import { EASE_OUT, fadeUp, sectionStagger } from "@/components/motion/presets";
 
-function easeOutCubic(t: number) {
-  return 1 - (1 - t) ** 3;
-}
+/** First match moment — 13 June 2026, 17:00 Brasília. */
+const COUNTDOWN_TARGET_ISO = "2026-06-13T17:00:00-03:00";
 
-function useAnimatedInt(target: number, enabled: boolean, durationMs = 2200) {
-  const [value, setValue] = useState(0);
-  const startRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    if (!enabled) return;
-    startRef.current = null;
-    let frame: number;
-
-    const tick = (now: number) => {
-      if (startRef.current === null) startRef.current = now;
-      const elapsed = now - startRef.current;
-      const t = Math.min(elapsed / durationMs, 1);
-      setValue(Math.round(target * easeOutCubic(t)));
-      if (t < 1) frame = requestAnimationFrame(tick);
-    };
-
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  }, [enabled, target, durationMs]);
-
-  return value;
-}
+/** Lilita + glyph shadow (same system as hero CTA); white fill on green button. */
+const countdownCtaLabelStyle = {
+  ...HEADER_GLYPH_STYLE,
+  color: "#FFFFFF",
+  fontSize: "35px",
+  lineHeight: "57px",
+  letterSpacing: "0",
+  leadingTrim: "none",
+} as CSSProperties;
 
 type CountBlockProps = {
   label: string;
   value: number;
-  enabled: boolean;
-  delayMs?: number;
 };
 
-const countBlockVariants: Variants = {
-  hidden: { opacity: 0, y: 36, scale: 0.88, rotate: -4 },
+const countBlockContainerVariants: Variants = {
+  hidden: { opacity: 0, y: 18 },
   show: {
     opacity: 1,
     y: 0,
-    scale: 1,
-    rotate: 0,
-    transition: { type: "spring", stiffness: 220, damping: 20 },
+    transition: {
+      type: "spring",
+      stiffness: 260,
+      damping: 26,
+      staggerChildren: 0.1,
+      delayChildren: 0.04,
+    },
   },
 };
 
-function CountBlock({ label, value, enabled, delayMs = 0 }: CountBlockProps) {
-  const [active, setActive] = useState(false);
+const countBlockNumberVariants: Variants = {
+  hidden: { scale: 0.45, opacity: 0 },
+  show: {
+    scale: 1,
+    opacity: 1,
+    transition: { type: "spring", stiffness: 420, damping: 22, mass: 0.65 },
+  },
+};
 
-  useEffect(() => {
-    if (!enabled) return;
-    const t = window.setTimeout(() => setActive(true), delayMs);
-    return () => window.clearTimeout(t);
-  }, [enabled, delayMs]);
+const countBlockLabelVariants: Variants = {
+  hidden: { opacity: 0, y: 6 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: EASE_OUT },
+  },
+};
 
-  const display = useAnimatedInt(value, active, 2000);
-
+function CountBlock({ label, value }: CountBlockProps) {
   return (
     <motion.div
-      className="relative flex min-w-[140px] flex-col items-center rounded-2xl border-[3px] border-arena-ink bg-arena-cream px-6 py-8 shadow-sticker"
-      variants={countBlockVariants}
-      whileHover={{
-        y: -8,
-        rotate: -1.5,
-        boxShadow: "8px 10px 0 #0a0a0a",
-      }}
-      whileTap={{ scale: 0.97 }}
-      transition={{ type: "spring", stiffness: 400, damping: 22 }}
+      className="flex min-w-[min(28vw,140px)] flex-1 flex-col items-center rounded-2xl border-[3px] border-[#0A0A0A] bg-white px-4 py-6 sm:min-w-[160px] sm:px-6 sm:py-8"
+      variants={countBlockContainerVariants}
     >
-      <span className="font-display text-6xl tabular-nums text-arena-ink sm:text-7xl md:text-8xl">
-        {display}
-      </span>
-      <span className="mt-2 font-condensed text-sm uppercase tracking-[0.2em] text-arena-ink/70">
+      <motion.span
+        className="origin-center font-display text-5xl tabular-nums leading-none text-[#0A0A0A] sm:text-6xl md:text-7xl"
+        variants={countBlockNumberVariants}
+      >
+        {value}
+      </motion.span>
+      <motion.span
+        className="mt-3 font-condensed text-xs uppercase tracking-[0.22em] text-[#0A0A0A] sm:text-sm"
+        variants={countBlockLabelVariants}
+      >
         {label}
-      </span>
+      </motion.span>
     </motion.div>
   );
 }
 
-export function CountdownSection() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-120px" });
+function useCountdownTo(targetMs: number, tickMs: number) {
+  const [now, setNow] = useState(() => Date.now());
 
-  const { days, hours, minutes } = useMemo(() => {
-    const event = new Date("2026-12-05T20:00:00-03:00");
-    const now = new Date();
-    const diff = Math.max(0, event.getTime() - now.getTime());
+  useEffect(() => {
+    const id = window.setInterval(() => setNow(Date.now()), tickMs);
+    return () => window.clearInterval(id);
+  }, [tickMs]);
+
+  return useMemo(() => {
+    const diff = Math.max(0, targetMs - now);
     const d = Math.floor(diff / (1000 * 60 * 60 * 24));
     const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
     const m = Math.floor((diff / (1000 * 60)) % 60);
     return { days: d, hours: h, minutes: m };
-  }, []);
+  }, [now, targetMs]);
+}
+
+export function CountdownSection() {
+  const targetMs = useMemo(
+    () => new Date(COUNTDOWN_TARGET_ISO).getTime(),
+    [],
+  );
+  const { days, hours, minutes } = useCountdownTo(targetMs, 1000);
 
   return (
     <Section
       id="countdown"
       variant="yellow"
-      className="border-b-[3px] border-arena-ink"
-      innerClassName="relative"
-      decor={<SectionDecor items={DECOR_COUNTDOWN} />}
+      className="border-b-[3px] border-[#0A0A0A] bg-[#FFBE3B]"
+      innerClassName="relative pb-24 pt-12 sm:pb-28 sm:pt-16 md:pb-32"
+      decor={<CountdownSectionDecor />}
     >
-      <div ref={ref} className="text-center">
+      <div className="relative z-10 text-center">
         <motion.div
           variants={sectionStagger}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-60px" }}
         >
-          <motion.div variants={fadeUp} className="mb-6 inline-block">
-            <Badge tone="red" rotate={5}>
-              Medidor de hype
-            </Badge>
-          </motion.div>
           <motion.h2
-            className="font-display text-5xl uppercase leading-none text-arena-ink sm:text-6xl md:text-7xl"
+            className="font-display text-[clamp(2rem,5.5vw,3.75rem)] font-normal uppercase leading-[0.95] tracking-normal text-[#0A0A0A] sm:text-[clamp(2.5rem,5vw,4.25rem)]"
             variants={fadeUp}
           >
-            Contagem
-            <span className="mt-2 block text-arena-blue">até a abertura</span>
+            Estamos quase lá!
           </motion.h2>
           <motion.p
-            className="mx-auto mt-6 max-w-lg font-sans text-base text-arena-ink/85 sm:text-lg"
+            className="mx-auto mt-5 max-w-2xl px-1 font-sans text-base leading-relaxed text-[#0A0A0A] sm:mt-6 sm:text-lg"
             variants={fadeUp}
           >
-            Números grandes, sombras fortes, animação com mola — a mesma energia
-            de um telão no dia do jogo.
+            Faltam poucos dias para a Arena Ópera dominar Curitiba. Garanta
+            agora sua entrada na pré-venda exclusiva e assegure seu lugar no
+            Ópera Concept Hall antes que o lote vire.
           </motion.p>
         </motion.div>
 
         <motion.div
-          className="mt-14 flex flex-wrap items-stretch justify-center gap-6 rounded-3xl border-[3px] border-arena-ink bg-arena-cream/50 px-4 py-10 shadow-sticker sm:gap-10 md:px-10 md:py-12"
-          initial={{ opacity: 0, y: 28, scale: 0.98 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          className="mx-auto mt-10 max-w-3xl rounded-2xl border-[3px] border-[#0A0A0A] bg-[#FFF8DC] px-4 py-8 sm:mt-12 sm:rounded-3xl sm:px-8 sm:py-10"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.6, ease: EASE_OUT, delay: 0.15 }}
+          transition={{ duration: 0.55, ease: EASE_OUT, delay: 0.08 }}
         >
           <motion.div
-            className="flex flex-wrap items-stretch justify-center gap-6 sm:gap-10"
+            className="flex flex-wrap items-stretch justify-center gap-4 sm:gap-6 md:gap-8"
             variants={sectionStagger}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-20px" }}
           >
-            <CountBlock
-              label="Dias"
-              value={days}
-              enabled={isInView}
-              delayMs={0}
-            />
-            <CountBlock
-              label="Horas"
-              value={hours}
-              enabled={isInView}
-              delayMs={120}
-            />
-            <CountBlock
-              label="Minutos"
-              value={minutes}
-              enabled={isInView}
-              delayMs={240}
-            />
+            <CountBlock label="Dias" value={days} />
+            <CountBlock label="Horas" value={hours} />
+            <CountBlock label="Minutos" value={minutes} />
           </motion.div>
         </motion.div>
 
-        <WorldCupsTimelineStrip />
+        <motion.div
+          className="mt-10 flex justify-center sm:mt-12"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45, ease: EASE_OUT, delay: 0.12 }}
+        >
+          <Link
+            href="#cta"
+            className="box-border inline-flex h-[69px] w-[min(323px,calc(100%-1.5rem))] max-w-full shrink-0 items-center justify-center rounded-[20px] border-2 border-solid border-[#232323] bg-[#00A651] text-white transition-[filter] hover:brightness-[1.05] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#232323] no-underline"
+          >
+            <ShadowText style={countdownCtaLabelStyle}>CADASTRE-SE</ShadowText>
+          </Link>
+        </motion.div>
       </div>
     </Section>
   );

@@ -19,7 +19,7 @@ const STAR_MOBILE_PX = 46;
 export function HeroStarsArc() {
   return (
     <div className="w-full" aria-hidden>
-      <div className="mb-1 w-full sm:mb-[clamp(0.125rem,0.6vw,0.25rem)]">
+      <div className="mb-1 w-full sm:mb-[clamp(0.125rem,calc(var(--hero-vw)*0.006),0.25rem)]">
         <div className="flex w-full items-start justify-between gap-0.5 sm:hidden">
           {ARC_Y_MOBILE.map((y, i) => (
             <div key={`m-${i}`} className="flex shrink-0 justify-center">
@@ -35,20 +35,24 @@ export function HeroStarsArc() {
             </div>
           ))}
         </div>
-        <div className="hidden w-full items-center justify-between gap-1 sm:flex">
-          {ARC_Y_DESKTOP.map((y, i) => (
-            <div key={`d-${i}`} className="flex shrink-0 justify-center">
-              <Image
-                src={`${ASSET}/star.svg`}
-                alt=""
-                width={STAR_DESKTOP_PX}
-                height={STAR_DESKTOP_PX}
-                className="h-[76px] w-[76px] object-contain"
-                style={{ transform: `translateY(${y}px)` }}
-                unoptimized
-              />
+        <div className="hidden w-full sm:block">
+          <div className="origin-top sm:scale-[var(--hero-star-arc-scale)]">
+            <div className="flex w-full items-center justify-between gap-1">
+              {ARC_Y_DESKTOP.map((y, i) => (
+                <div key={`d-${i}`} className="flex shrink-0 justify-center">
+                  <Image
+                    src={`${ASSET}/star.svg`}
+                    alt=""
+                    width={STAR_DESKTOP_PX}
+                    height={STAR_DESKTOP_PX}
+                    className="h-[76px] w-[76px] object-contain"
+                    style={{ transform: `translateY(${y}px)` }}
+                    unoptimized
+                  />
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </div>

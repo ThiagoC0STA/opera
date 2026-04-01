@@ -14,9 +14,8 @@ export function FinalCtaSection() {
     <Section
       id="cta"
       variant="blue"
-      className="overflow-visible border-b-[3px] border-arena-ink"
+      className="overflow-visible"
       innerClassName="relative py-24 sm:py-28"
-      decor={<SectionDecor items={DECOR_FINAL_CTA} />}
     >
       <motion.div
         className="pointer-events-none absolute -left-24 top-1/4 h-72 w-72 rounded-full bg-arena-yellow/25 blur-3xl"

@@ -69,37 +69,6 @@ export const DECOR_EXPERIENCE: SiteDecorPlacement[] = [
 ];
 
 /**
- * Contagem — fundo amarelo: sem bolas (somem no campo).
- * Só sol + nuvem, cantos afastados do bloco central de números.
- */
-export const DECOR_COUNTDOWN: SiteDecorPlacement[] = [
-  {
-    id: "nuvem-tl",
-    src: e2("nuvem.svg"),
-    alt: "",
-    wrapperClass: "-left-[3%] -top-[3%] max-sm:hidden",
-    maxWidthClass: "w-24 sm:w-32",
-    delay: 0,
-  },
-  {
-    id: "sun2-tr",
-    src: e2("sun2.svg"),
-    alt: "",
-    wrapperClass: "-right-[4%] top-[6%] max-md:hidden",
-    maxWidthClass: "w-24 sm:w-32",
-    delay: 0.07,
-  },
-  {
-    id: "sun-bl",
-    src: e2("sun.svg"),
-    alt: "",
-    wrapperClass: "-left-[2%] bottom-[4%] max-sm:hidden",
-    maxWidthClass: "w-28 sm:w-36",
-    delay: 0.11,
-  },
-];
-
-/**
  * CTA azul: sem bolas (confundem com o fundo). Sol + nuvem nos cantos, mais discretos.
  */
 export const DECOR_FINAL_CTA: SiteDecorPlacement[] = [

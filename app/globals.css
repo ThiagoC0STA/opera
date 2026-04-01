@@ -3,6 +3,32 @@
 :root {
   /* Matches SiteHeader bar + safe area — hero height = remaining viewport */
   --site-header-height: calc(87px + env(safe-area-inset-top, 0px));
+  /**
+   * Hero horizontal reference: full width on phones; on sm+ caps at 1920px so vw-based
+   * hero art matches a single “design width” on ultrawide / large monitors (not full 100vw).
+   */
+  --hero-vw: 100vw;
+  /* Hero desktop caps (default = 1800px+); tightened below 1800px in a second query */
+  --hero-macaw-max: 646px;
+  --hero-macaw-vw: 0.45;
+  --hero-date-max: 441px;
+  --hero-date-h-max: 93px;
+  --hero-date-text-max: 57px;
+  --hero-logo-lg-max: 516px;
+  --hero-logo-sm-max: 400px;
+  --hero-center-max: 573px;
+  --hero-trophy-max: 118px;
+  --hero-cta-max-h: 69px;
+  --hero-cta-max-w: 323px;
+  --hero-cta-text-max: 35px;
+  --hero-venue-max: 182px;
+  /* Desktop star arc: full size ≥1800px; slightly smaller 640–1799px (one DOM row, no duplicate stars). */
+  --hero-star-arc-scale: 1;
+  --hero-bud-outer-w: 284px;
+  --hero-bud-outer-h: 75px;
+  --hero-bud-logo-w: 148px;
+  --hero-bud-logo-h: 47px;
+  --hero-ball: 46px;
   --background: #0f0f12;
   --foreground: #fafafa;
   --arena-green: #36A64E;
@@ -47,6 +73,38 @@ body, html {
   background: #FFEBD5;
   color: var(--foreground);
   overflow-x: hidden;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --hero-vw: min(100vw, 1920px);
+  }
+}
+
+/* Viewports below 1800px: smaller art + slightly lower vw pressure so the stack is not huge/cramped */
+@media (min-width: 640px) and (max-width: 1799px) {
+  :root {
+    --hero-vw: min(100vw, 1560px);
+    --hero-macaw-max: 486px;
+    --hero-macaw-vw: 0.38;
+    --hero-date-max: 378px;
+    --hero-date-h-max: 80px;
+    --hero-date-text-max: 46px;
+    --hero-logo-lg-max: 428px;
+    --hero-logo-sm-max: 342px;
+    --hero-center-max: 524px;
+    --hero-trophy-max: 100px;
+    --hero-cta-max-h: 60px;
+    --hero-cta-max-w: 296px;
+    --hero-cta-text-max: 30px;
+    --hero-venue-max: 160px;
+    --hero-star-arc-scale: 0.81578947;
+    --hero-bud-outer-w: 252px;
+    --hero-bud-outer-h: 68px;
+    --hero-bud-logo-w: 132px;
+    --hero-bud-logo-h: 42px;
+    --hero-ball: 40px;
+  }
 }
 
 .text-outline {

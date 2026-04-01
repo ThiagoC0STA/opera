@@ -12,7 +12,7 @@ type HeroLogoProps = {
 export function HeroLogo({ className = "" }: HeroLogoProps) {
   return (
     <div
-      className={`mx-auto w-full max-w-[min(320px,min(82vw,calc(100vw-2rem)))] sm:max-w-[400px] lg:max-w-[516px] ${className}`}
+      className={`mx-auto w-full max-w-[min(320px,min(calc(var(--hero-vw)*0.82),calc(var(--hero-vw)-2rem)))] sm:max-w-[var(--hero-logo-sm-max)] lg:max-w-[var(--hero-logo-lg-max)] ${className}`}
     >
       <Image
         src="/final-elements/logo.svg"
