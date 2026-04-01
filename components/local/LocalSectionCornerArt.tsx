@@ -21,7 +21,7 @@ export function LocalSectionCornerArt() {
           width={226}
           height={279}
           className="h-auto w-full select-none object-contain object-bottom-left"
-          unoptimized
+          
         />
       </div>
       <div className="absolute -bottom-2 -right-4 w-[min(78vw,340px)] sm:-bottom-4 sm:-right-8 sm:w-[min(58vw,440px)]">
@@ -31,7 +31,7 @@ export function LocalSectionCornerArt() {
           width={508}
           height={412}
           className="h-auto w-full select-none object-contain object-bottom-right"
-          unoptimized
+          
         />
       </div>
     </div>

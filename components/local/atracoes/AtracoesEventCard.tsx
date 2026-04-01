@@ -113,7 +113,7 @@ export function AtracoesEventCard({
               width={topImageWidth}
               height={topImageHeight}
               className={imageClassName}
-              unoptimized
+              
             />
           </div>
         </div>
