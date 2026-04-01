@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Anton, Bebas_Neue, Luckiest_Guy, DM_Sans } from "next/font/google";
+import { Alexandria, Anton, Bebas_Neue, DM_Sans, Lilita_One, Luckiest_Guy } from "next/font/google";
 import "./globals.css";
 
 const bebasNeue = Bebas_Neue({
@@ -25,6 +25,18 @@ const dmSans = DM_Sans({
   subsets: ["latin"],
 });
 
+const lilitaOne = Lilita_One({
+  weight: "400",
+  variable: "--font-f-lilita",
+  subsets: ["latin"],
+});
+
+const alexandria = Alexandria({
+  weight: "700",
+  variable: "--font-f-alexandria",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: "Arena Ópera — Experiência ao vivo",
   description:
@@ -43,7 +55,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${bebasNeue.variable} ${anton.variable} ${luckiestGuy.variable} ${dmSans.variable} h-full antialiased`}
+      className={`${bebasNeue.variable} ${anton.variable} ${luckiestGuy.variable} ${dmSans.variable} ${lilitaOne.variable} ${alexandria.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col overflow-x-hidden font-sans">
         {children}

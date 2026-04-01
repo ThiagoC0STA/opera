@@ -1,75 +1,55 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Button } from "@/components/Button";
+import {
+  HEADER_GLYPH_CTA_STYLE,
+  HEADER_GLYPH_STYLE,
+  ShadowText,
+} from "./ShadowText";
 
 const navLinkClass =
-  "rounded-lg px-3 py-2 font-condensed text-xs uppercase tracking-[0.12em] text-white/75 transition-colors hover:bg-white/10 hover:text-arena-yellow sm:text-sm";
+  "text-inherit no-underline px-1 py-1 uppercase transition-opacity hover:opacity-90";
+
+const ctaClass =
+  "box-border inline-flex h-[66.578949px] w-[min(323px,calc(100vw-2.5rem))] shrink-0 items-center justify-center rounded-[20px] border-2 border-[#232323] bg-[#FFBE3B] text-inherit no-underline uppercase leading-none shadow-none transition-[filter] hover:brightness-[1.03] sm:w-[323px]";
 
 export function SiteHeader() {
   return (
-    <motion.header
-      className="sticky top-0 z-50"
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ type: "spring", stiffness: 280, damping: 30 }}
-    >
-      <div className="border-b-[3px] border-arena-ink bg-arena-ink/90 pt-[max(0.5rem,env(safe-area-inset-top))] shadow-[0_12px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl backdrop-saturate-150">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 pb-3.5 pt-1 sm:gap-4 sm:px-6 sm:pb-4 sm:pt-1.5 lg:px-8">
-          <Link
-            href="/"
-            className="group flex items-center gap-2 sm:gap-3"
-            aria-label="Arena Ópera — início"
-          >
-            <span className="relative h-9 w-9 shrink-0 overflow-hidden rounded-lg border-[3px] border-arena-yellow bg-arena-cream shadow-sticker-sm transition-transform group-hover:scale-[1.05] group-hover:rotate-[-4deg] sm:h-10 sm:w-10">
-              <Image
-                src="/logoop.png"
-                alt=""
-                width={160}
-                height={160}
-                unoptimized
-                className="h-full w-full object-contain object-center"
-                aria-hidden
-              />
-            </span>
-            <span className="hidden text-left font-display text-lg uppercase leading-tight tracking-wide text-white sm:block sm:text-xl">
-              Arena Ópera
-            </span>
-          </Link>
-
+    <div>
+      <div className="relative  bg-arena-header-green shadow-[0_10px_36px_rgba(0,0,0,0.28)]">
+        <div className="mx-auto flex h-[87px] max-w-6xl items-center justify-center px-3 sm:px-6 lg:px-8">
           <nav
-            className="hidden items-center gap-1 md:flex lg:gap-2"
+            className="mx-auto flex w-max max-w-full flex-nowrap items-center justify-center gap-8 sm:gap-10 md:gap-12"
             aria-label="Principal"
           >
             <Link href="#lineup" className={navLinkClass}>
-              Programação
-            </Link>
-            <Link href="#experience" className={navLinkClass}>
-              Experiência
-            </Link>
-            <Link href="#countdown" className={navLinkClass}>
-              Contagem
+              <ShadowText
+                className="header-nav-font"
+                style={HEADER_GLYPH_STYLE}
+              >
+                Atrações
+              </ShadowText>
             </Link>
             <Link href="#local" className={navLinkClass}>
-              Local
+              <ShadowText
+                className="header-nav-font"
+                style={HEADER_GLYPH_STYLE}
+              >
+                Local
+              </ShadowText>
             </Link>
-            <Link href="#dicas" className={navLinkClass}>
-              Dicas
+            <Link href="#cta" className={ctaClass}>
+              <ShadowText
+                className="header-nav-font header-nav-font--cta"
+                style={HEADER_GLYPH_CTA_STYLE}
+              >
+                Cadastre-se
+              </ShadowText>
             </Link>
           </nav>
-
-          <Button
-            href="#lineup"
-            variant="primary"
-            size="md"
-            className="shrink-0"
-          >
-            Ingressos
-          </Button>
         </div>
       </div>
-    </motion.header>
+    </div>
   );
 }

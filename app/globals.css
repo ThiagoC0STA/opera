@@ -2,7 +2,7 @@
 
 :root {
   /* Matches SiteHeader bar + safe area — hero height = remaining viewport */
-  --site-header-height: calc(4rem + env(safe-area-inset-top, 0px));
+  --site-header-height: calc(87px + env(safe-area-inset-top, 0px));
   --background: #0f0f12;
   --foreground: #fafafa;
   --arena-green: #00a651;
@@ -11,8 +11,14 @@
   --arena-red: #e63946;
   --arena-pink: #ff2d92;
   --arena-cream: #fff8e7;
+  /* Home hero / header (Brazil WC theme) */
+  --arena-header-green: #31613d;
+  --arena-cta-orange: #ffb84d;
+  --arena-hero-beige: #FFEBD5;
+  --arena-date-green: #36A64E;
   --sticker-shadow: 6px 6px 0 #0a0a0a;
   --sticker-shadow-sm: 4px 4px 0 #0a0a0a;
+  --sticker-shadow-lg: 8px 8px 0 #0a0a0a;
 }
 
 @theme inline {
@@ -24,21 +30,21 @@
   --color-arena-red: var(--arena-red);
   --color-arena-pink: var(--arena-pink);
   --color-arena-cream: var(--arena-cream);
+  --color-arena-header-green: var(--arena-header-green);
+  --color-arena-cta-orange: var(--arena-cta-orange);
+  --color-arena-hero-beige: var(--arena-hero-beige);
+  --color-arena-date-green: var(--arena-date-green);
   --color-arena-ink: #0a0a0a;
   --font-sans: var(--font-f-body), system-ui, sans-serif;
   --font-display: var(--font-f-display), system-ui, sans-serif;
   --font-condensed: var(--font-f-condensed), system-ui, sans-serif;
   --font-playful: var(--font-f-playful), system-ui, cursive;
+  --font-lilita: var(--font-f-lilita), system-ui, sans-serif;
+  --font-alexandria: var(--font-f-alexandria), system-ui, sans-serif;
 }
 
-@media (min-width: 640px) {
-  :root {
-    --site-header-height: calc(4.5rem + env(safe-area-inset-top, 0px));
-  }
-}
-
-body {
-  background: var(--background);
+body, html {
+  background: #FFEBD5;
   color: var(--foreground);
 }
 
@@ -79,10 +85,62 @@ body {
   box-shadow: var(--sticker-shadow-sm);
 }
 
+.shadow-sticker-lg {
+  box-shadow: var(--sticker-shadow-lg);
+}
+
 /* Subtle film grain for poster-style heroes */
 .hero-noise {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 180px 180px;
   mix-blend-mode: overlay;
+}
+
+@layer components {
+  /* Header nav glyph style — keep in @layer so Tailwind v4 always emits it. */
+  .header-nav-font {
+    display: inline-block;
+    color: #ffebd5;
+    font-family: var(--font-f-lilita), system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 33px;
+    line-height: 65.86px;
+    letter-spacing: -0.02em;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-text-stroke: 0.74px #232323;
+    paint-order: stroke fill;
+    text-shadow:
+      0.74px 0 0 #232323,
+      -0.74px 0 0 #232323,
+      0 0.74px 0 #232323,
+      0 -0.74px 0 #232323,
+      0.74px 0.74px 0 #232323,
+      -0.74px 0.74px 0 #232323,
+      0.74px -0.74px 0 #232323,
+      -0.74px -0.74px 0 #232323,
+      -1.6px 1.8px 0 #000000;
+  }
+
+  .header-nav-font--cta {
+    line-height: 1;
+  }
+
+  /* White on green — chunky rounded type with dark green glyph shadow (ref. layout 1). */
+  .hero-date-text {
+    color: #ffffff;
+    -webkit-text-stroke: 0.45px #1b3d28;
+    paint-order: stroke fill;
+    text-shadow:
+      0.65px 0 0 #2a5c38,
+      -0.65px 0 0 #2a5c38,
+      0 0.65px 0 #2a5c38,
+      0 -0.65px 0 #2a5c38,
+      0.65px 0.65px 0 #2a5c38,
+      -0.65px 0.65px 0 #2a5c38,
+      0.65px -0.65px 0 #2a5c38,
+      -0.65px -0.65px 0 #2a5c38,
+      2px 2.5px 0 #1a3d24;
+  }
 }
