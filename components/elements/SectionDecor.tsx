@@ -16,7 +16,7 @@ export function SectionDecor({ items }: SectionDecorProps) {
 
   return (
     <div
-      className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+      className="pointer-events-none absolute inset-0 z-0 max-md:hidden overflow-hidden"
       aria-hidden
     >
       {items.map((item, index) => (

@@ -13,7 +13,7 @@ export function CountdownSectionDecor() {
       className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
       aria-hidden
     >
-      <div className="absolute -left-1 top-[4%] w-[min(28vw,135px)] sm:left-[2%] sm:top-[6%] sm:w-[120px]">
+      <div className="absolute hidden sm:left-[2%] sm:top-[6%] sm:block sm:w-[120px]">
         <Image
           src={`${ASSET}/ball.png`}
           alt=""
@@ -23,7 +23,7 @@ export function CountdownSectionDecor() {
           
         />
       </div>
-      <div className="absolute -right-2 top-[3%] w-[min(42vw,200px)] sm:right-[1%] sm:top-[5%] sm:w-[220px]">
+      <div className="absolute -right-2 top-[3%] hidden w-[min(42vw,200px)] sm:right-[1%] sm:top-[5%] sm:w-[220px] md:block">
         <Image
           src={`${ASSET}/confeti2.png`}
           alt=""

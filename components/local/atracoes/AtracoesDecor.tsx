@@ -10,7 +10,7 @@ const ASSET = "/final-elements/atracoes";
 export function AtracoesDecor() {
   return (
     <div
-      className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+      className="pointer-events-none absolute inset-0 z-0 max-md:hidden overflow-hidden"
       aria-hidden
     >
       <div className="absolute -left-2 top-[6%] w-[min(28vw,120px)] sm:left-[2%] sm:top-[10%] sm:w-[140px]">

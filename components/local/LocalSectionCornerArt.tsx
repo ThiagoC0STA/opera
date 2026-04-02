@@ -11,7 +11,7 @@ const PLANT = "/final-elements/local/plant.png";
 export function LocalSectionCornerArt() {
   return (
     <div
-      className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+      className="pointer-events-none absolute inset-0 z-0 max-md:hidden overflow-hidden"
       aria-hidden
     >
       <div className="absolute -bottom-3 -left-4 w-[min(44vw,180px)] sm:-bottom-4 sm:-left-6 sm:w-[min(28vw,240px)]">
