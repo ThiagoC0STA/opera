@@ -37,10 +37,46 @@ const alexandria = Alexandria({
   subsets: ["latin"],
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL &&
+  /^https?:\/\//i.test(process.env.NEXT_PUBLIC_SITE_URL)
+    ? process.env.NEXT_PUBLIC_SITE_URL
+    : "http://localhost:3000";
+
+const ogTitle = "Arena Ópera — Experiência ao vivo";
+const ogDescription =
+  "Energia de estádio brasileiro, luzes de festival e o rugido da noite de show. Sede em Curitiba (CWB), dezembro de 2026.";
+const brandLogoPath = "/arena-opera.png";
+
 export const metadata: Metadata = {
-  title: "Arena Ópera — Experiência ao vivo",
-  description:
-    "Energia de estádio brasileiro, luzes de festival e o rugido da noite de show. Sede em Curitiba (CWB), dezembro de 2026.",
+  metadataBase: new URL(siteUrl),
+  title: ogTitle,
+  description: ogDescription,
+  icons: {
+    icon: [{ url: brandLogoPath, type: "image/png" }],
+    apple: [{ url: brandLogoPath, type: "image/png" }],
+  },
+  openGraph: {
+    title: ogTitle,
+    description: ogDescription,
+    locale: "pt_BR",
+    type: "website",
+    siteName: "Arena Ópera",
+    images: [
+      {
+        url: brandLogoPath,
+        width: 512,
+        height: 512,
+        alt: "Arena Ópera",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: ogTitle,
+    description: ogDescription,
+    images: [brandLogoPath],
+  },
 };
 
 export const viewport: Viewport = {
