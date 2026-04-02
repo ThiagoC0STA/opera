@@ -45,7 +45,7 @@ const siteUrl =
 
 const ogTitle = "Arena Ópera — Experiência ao vivo";
 const ogDescription =
-  "Energia de estádio brasileiro, luzes de festival e o rugido da noite de show. Sede em Curitiba (CWB), dezembro de 2026.";
+  "Energia de estádio brasileiro, luzes de festival e o rugido da noite de show. Sede em Curitiba (CWB)";
 const brandLogoPath = "/arena-opera.png";
 
 export const metadata: Metadata = {
