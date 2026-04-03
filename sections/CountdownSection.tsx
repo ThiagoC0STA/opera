@@ -155,9 +155,10 @@ export function CountdownSection() {
             className="mx-auto mt-5 max-w-2xl px-1 font-sans text-base leading-relaxed text-[#0A0A0A] sm:mt-6 sm:text-lg"
             variants={fadeUp}
           >
-            Faltam poucos dias para a Arena Ópera dominar Curitiba. Garanta
-            agora sua entrada na pré-venda exclusiva e assegure seu lugar no
-            Ópera Concept Hall antes que o lote vire.
+            Faltam poucos dias para a Arena Ópera dominar Curitiba com as
+            melhores festas da Copa do Mundo 2026. Garanta agora sua entrada na
+            pré-venda exclusiva e assegure seu lugar no Ópera Concept Hall antes
+            que o lote vire.
           </motion.p>
         </motion.div>
 

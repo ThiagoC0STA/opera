@@ -69,6 +69,9 @@ export function Hero() {
                 id="hero-heading"
                 className="flex w-full flex-col items-center"
               >
+                <span className="sr-only">
+                  Arena Ópera — Festas da Copa do Mundo 2026 em Curitiba
+                </span>
                 <HeroLogo />
               </h1>
 

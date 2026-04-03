@@ -11,9 +11,12 @@ const ctaClass =
 
 export function SiteHeader() {
   return (
-    <div>
+    <header role="banner">
       <div className="site-header-shell relative bg-arena-header-green pt-[env(safe-area-inset-top,0px)] shadow-[0_10px_36px_rgba(0,0,0,0.28)] sm:pt-0">
-        <div className="mx-auto flex h-[60px] md:h-[87px] max-w-6xl flex-row flex-nowrap items-center justify-between md:justify-center gap-2 px-2 sm:gap-8 sm:px-6 md:gap-12 lg:px-8">
+        <nav
+          aria-label="Navegação principal"
+          className="mx-auto flex h-[60px] md:h-[87px] max-w-6xl flex-row flex-nowrap items-center justify-between md:justify-center gap-2 px-2 sm:gap-8 sm:px-6 md:gap-12 lg:px-8"
+        >
           <Link href="#atracoes" className={navLinkClass}>
             <ShadowText className="header-nav-font">Atrações</ShadowText>
           </Link>
@@ -25,8 +28,8 @@ export function SiteHeader() {
               Cadastre-se
             </ShadowText>
           </Link>
-        </div>
+        </nav>
       </div>
-    </div>
+    </header>
   );
 }

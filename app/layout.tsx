@@ -41,17 +41,22 @@ const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL &&
   /^https?:\/\//i.test(process.env.NEXT_PUBLIC_SITE_URL)
     ? process.env.NEXT_PUBLIC_SITE_URL
-    : "http://localhost:3000";
+    : "https://www.arenaopera.com.br";
 
-const ogTitle = "Arena Ópera — Experiência ao vivo";
+const ogTitle = "Arena Ópera · Festas da Copa do Mundo 2026 em Curitiba";
 const ogDescription =
-  "Energia de estádio brasileiro, luzes de festival e o rugido da noite de show. Sede em Curitiba (CWB)";
+  "Viva os jogos do Brasil na Copa 2026 com festas épicas no Ópera Concept Hall em Curitiba. Telão LED 8×5m, Baile do Jô, Wood's e mais. 13 e 19 de junho. Cadastre-se na pré-venda!";
 const brandLogoPath = "/arena-opera.png";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: ogTitle,
   description: ogDescription,
+  applicationName: "Arena Ópera",
+  robots: { index: true, follow: true },
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: [{ url: brandLogoPath, type: "image/png" }],
     apple: [{ url: brandLogoPath, type: "image/png" }],
@@ -59,6 +64,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: ogTitle,
     description: ogDescription,
+    url: "/",
     locale: "pt_BR",
     type: "website",
     siteName: "Arena Ópera",
@@ -67,20 +73,25 @@ export const metadata: Metadata = {
         url: brandLogoPath,
         width: 512,
         height: 512,
-        alt: "Arena Ópera",
+        alt: "Logo Arena Ópera — Festas da Copa do Mundo 2026 em Curitiba",
       },
     ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: ogTitle,
     description: ogDescription,
     images: [brandLogoPath],
+  },
+  other: {
+    "geo.region": "BR-PR",
+    "geo.placename": "Curitiba",
   },
 };
 
 export const viewport: Viewport = {
   viewportFit: "cover",
+  themeColor: "#31613d",
 };
 
 export default function RootLayout({

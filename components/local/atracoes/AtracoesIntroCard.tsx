@@ -79,10 +79,10 @@ export function AtracoesIntroCard() {
           className="min-w-0 md:min-w-[562px] text-arena-ink/90"
           style={introBodyStyle}
         >
-          As festas que você já ama ganharam o ritmo da maior competição do
-          planeta! A Arena Ópera chega para transformar a torcida em um
-          espetáculo imersivo no Ópera Concept Hall. Imagine vibrar com cada
-          lance em um painel de LED gigante de 8x5m, cercado por ativações
+          As festas que você já ama ganharam o ritmo da Copa do Mundo 2026!
+          A Arena Ópera chega para transformar a torcida em um espetáculo
+          imersivo no Ópera Concept Hall em Curitiba. Imagine vibrar com cada
+          lance em um painel de LED gigante de 8×5m, cercado por ativações
           exclusivas das marcas que você ama e uma energia que Curitiba nunca
           viu. Quando o apito final toca, a festa só começa: atrações nacionais
           assumem o palco para transformar a vitória em uma experiência única.

@@ -16,7 +16,7 @@ export function HeroLogo({ className = "" }: HeroLogoProps) {
     >
       <Image
         src="/final-elements/logo.svg"
-        alt="Arena Ópera"
+        alt="Arena Ópera — Copa do Mundo 2026 em Curitiba"
         width={LOGO_W}
         height={LOGO_H}
         priority

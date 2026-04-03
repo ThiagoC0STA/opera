@@ -10,7 +10,7 @@ export function HeroVenueLockup() {
     <div className="flex w-full justify-center mt-4 -mb-4 sm:max-[1799px]:mt-6 md:mb-0 md:mt-0">
       <Image
         src="/final-elements/opera-concept.svg"
-        alt="Ópera Concept Hall"
+        alt="Ópera Concept Hall — local do evento Arena Ópera em Curitiba"
         width={182}
         height={63}
         unoptimized

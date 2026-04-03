@@ -42,7 +42,7 @@ export function OperaArameMapEmbed() {
           referrerPolicy="no-referrer-when-downgrade"
         />
       </div>
-      <div className="relative z-10 border-t-[3px] border-arena-ink bg-arena-cream/90 px-4 py-4 sm:px-6 sm:py-5">
+      <address className="relative z-10 border-t-[3px] border-arena-ink bg-arena-cream/90 px-4 py-4 not-italic sm:px-6 sm:py-5">
         <p className="font-condensed text-xs uppercase tracking-[0.25em] text-arena-ink/60">
           Endereço
         </p>
@@ -65,7 +65,7 @@ export function OperaArameMapEmbed() {
             Abrir no Google Maps
           </ShadowText>
         </a>
-      </div>
+      </address>
     </div>
   );
 }

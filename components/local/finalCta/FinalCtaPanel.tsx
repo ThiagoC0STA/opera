@@ -58,8 +58,9 @@ export function FinalCtaPanel({ className = "" }: { className?: string }) {
           className="mx-auto mt-6 max-w-md font-sans text-sm leading-relaxed text-white sm:mt-7 sm:max-w-lg sm:text-base"
           variants={fadeUp}
         >
-          Garanta seu lugar no Arena Ópera! Cadastre-se agora mesmo em nossa
-          pré-venda para obter benefícios exclusivos.
+          Garanta seu lugar na Arena Ópera — a melhor festa da Copa do Mundo
+          2026 em Curitiba! Cadastre-se agora mesmo na pré-venda e garanta
+          benefícios exclusivos antes que os ingressos esgotem.
         </motion.p>
         <motion.div className="mt-9 sm:mt-10" variants={fadeUp}>
           <Link

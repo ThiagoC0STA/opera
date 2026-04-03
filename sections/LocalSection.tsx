@@ -26,14 +26,14 @@ export function LocalSection() {
           <LocalSectionPillTag />
           <h2 className="font-display text-4xl uppercase leading-[0.95] text-arena-ink sm:text-5xl md:text-6xl">
             Ópera Concept Hall
-            <span className="mt-2 block text-arena-blue">no coração da cidade</span>
+            <span className="mt-2 block text-arena-blue">no coração de Curitiba</span>
           </h2>
           <p className="mt-6 max-w-lg font-sans text-base text-arena-ink/85 sm:text-md">
             O Ópera Concept Hall é um espaço multifuncional de alto padrão
-            localizado no bairro de Santa Felicidade, em Curitiba. O local é
-            reconhecido por sua arquitetura imponente, pensado para você chegar
-            tranquilo, circular com segurança e aproveitar a noite inteira sem
-            preocupações.
+            no bairro de Santa Felicidade, em Curitiba — sede da Arena Ópera
+            durante a Copa do Mundo 2026. O local é reconhecido por sua
+            arquitetura imponente, pensado para você chegar tranquilo, circular
+            com segurança e aproveitar a noite inteira sem preocupações.
           </p>
         </motion.div>
 
