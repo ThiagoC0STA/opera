@@ -14,13 +14,23 @@ import { HeroVenueLockup } from "@/components/hero/HeroVenueLockup";
 const stagger = {
   initial: {},
   animate: {
-    transition: { staggerChildren: 0.09, delayChildren: 0.04 },
+    transition: { staggerChildren: 0.14, delayChildren: 0.1 },
   },
 };
 
 const rise = {
-  initial: { opacity: 0, y: 18 },
-  animate: { opacity: 1, y: 0 },
+  initial: { opacity: 0, y: 36, scale: 0.96 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring" as const,
+      stiffness: 120,
+      damping: 18,
+      mass: 0.9,
+    },
+  },
 };
 
 export function Hero() {

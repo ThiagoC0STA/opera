@@ -9,10 +9,10 @@ export function SiteFooter() {
     <footer className="border-t-[3px] border-arena-ink bg-arena-ink py-12 text-arena-cream">
       <motion.div
         className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-8 px-4 sm:flex-row sm:px-6 lg:px-8"
-        initial={{ opacity: 0, y: 16 }}
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-20px" }}
-        transition={{ duration: 0.5, ease: EASE_OUT }}
+        transition={{ type: "spring", stiffness: 120, damping: 18 }}
       >
         <motion.p
           className="font-display text-2xl uppercase tracking-wide"

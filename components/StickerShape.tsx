@@ -12,9 +12,9 @@ export function StickerDiamond({ className = "", delay = 0 }: StickerShapeProps)
     <motion.svg
       viewBox="0 0 120 120"
       className={className}
-      initial={{ opacity: 0, scale: 0, rotate: -20 }}
+      initial={{ opacity: 0, scale: 0, rotate: -30 }}
       animate={{ opacity: 1, scale: 1, rotate: 12 }}
-      transition={{ delay, type: "spring", stiffness: 260, damping: 16 }}
+      transition={{ delay, type: "spring", stiffness: 220, damping: 12, mass: 0.6 }}
       aria-hidden
     >
       <polygon
@@ -31,9 +31,9 @@ export function StickerStar({ className = "", delay = 0 }: StickerShapeProps) {
     <motion.svg
       viewBox="0 0 100 100"
       className={className}
-      initial={{ opacity: 0, rotate: 0 }}
-      animate={{ opacity: 1, rotate: -8 }}
-      transition={{ delay, type: "spring", stiffness: 200, damping: 14 }}
+      initial={{ opacity: 0, scale: 0, rotate: 20 }}
+      animate={{ opacity: 1, scale: 1, rotate: -8 }}
+      transition={{ delay, type: "spring", stiffness: 220, damping: 12, mass: 0.6 }}
       aria-hidden
     >
       <polygon

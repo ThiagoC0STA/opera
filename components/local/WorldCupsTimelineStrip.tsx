@@ -15,10 +15,10 @@ export function WorldCupsTimelineStrip() {
   return (
     <motion.div
       className="mx-auto mt-8 max-w-full px-2 sm:mt-10 md:mt-12"
-      initial={{ opacity: 0, y: 14 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 30, scale: 0.92 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.55, ease: EASE_OUT, delay: 0.08 }}
+      transition={{ type: "spring", stiffness: 130, damping: 18, delay: 0.1 }}
     >
       <Image
         src={SRC}

@@ -32,7 +32,7 @@ export function Sticker({
   return (
     <motion.div
       className={`relative border-4 border-arena-ink shadow-sticker ${ringClass} ${className}`}
-      initial={{ opacity: 0, scale: 0.88, rotate: rotate - 6 }}
+      initial={{ opacity: 0, scale: 0.3, rotate: rotate - 15 }}
       animate={{
         opacity: 1,
         scale: 1,
@@ -40,9 +40,20 @@ export function Sticker({
         y: [0, -floatRange, 0],
       }}
       transition={{
-        opacity: { delay: entranceDelay, duration: 0.45 },
-        scale: { delay: entranceDelay, type: "spring", stiffness: 260, damping: 20 },
-        rotate: { delay: entranceDelay, type: "spring", stiffness: 200, damping: 18 },
+        opacity: { delay: entranceDelay, duration: 0.4 },
+        scale: {
+          delay: entranceDelay,
+          type: "spring",
+          stiffness: 220,
+          damping: 14,
+          mass: 0.6,
+        },
+        rotate: {
+          delay: entranceDelay,
+          type: "spring",
+          stiffness: 180,
+          damping: 12,
+        },
         y: {
           delay: entranceDelay + 0.35,
           duration: floatDuration,
@@ -51,9 +62,10 @@ export function Sticker({
         },
       }}
       whileHover={{
-        scale: 1.06,
+        scale: 1.12,
         rotate: rotate + hoverRotate,
-        transition: { type: "spring", stiffness: 400, damping: 16 },
+        y: -floatRange * 1.5,
+        transition: { type: "spring", stiffness: 400, damping: 14 },
       }}
       {...rest}
     >

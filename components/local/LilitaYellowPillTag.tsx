@@ -31,10 +31,10 @@ export function LilitaYellowPillTag({
     <motion.span
       className={`box-border inline-flex shrink-0 items-center justify-center rounded-[17px] border-2 border-[#232323] bg-[#FFBE3B] ${className}`}
       style={{ rotate: 0 }}
-      initial={{ opacity: 0, y: 6, rotate: 0 }}
-      whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+      initial={{ opacity: 0, scale: 0.5, y: 10, rotate: -6 }}
+      whileInView={{ opacity: 1, scale: 1, y: 0, rotate: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ type: "spring", stiffness: 280, damping: 16, mass: 0.6 }}
     >
       <ShadowText className="uppercase" style={LILITA_YELLOW_PILL_LABEL_STYLE}>
         {children}

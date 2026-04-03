@@ -24,13 +24,13 @@ export function HeroPrimaryCta({ href = "#cta" }: HeroPrimaryCtaProps) {
   return (
     <motion.div
       className="w-full flex justify-center"
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-      transition={{ type: "spring", stiffness: 400, damping: 24 }}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      transition={{ type: "spring", stiffness: 400, damping: 18 }}
     >
       <Link
         href={href}
-        className="box-border flex h-14 min-h-14 w-[250px] md:w-full max-w-[min(var(--hero-cta-max-w),calc(var(--hero-vw)-2rem))] items-center justify-center rounded-[16px] border-2 border-[#232323] bg-[#FFBE3B] px-3 py-2 text-inherit no-underline uppercase leading-none transition-[filter] hover:brightness-[0.97] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#232323] sm:h-[min(calc(var(--hero-vw)*0.0479),var(--hero-cta-max-h))] sm:min-h-0 sm:max-w-[var(--hero-cta-max-w)] sm:rounded-[20px] sm:py-0 sm:px-0"
+        className="animate-pulse-glow box-border flex h-14 min-h-14 w-[250px] md:w-full max-w-[min(var(--hero-cta-max-w),calc(var(--hero-vw)-2rem))] items-center justify-center rounded-[16px] border-2 border-[#232323] bg-[#FFBE3B] px-3 py-2 text-inherit no-underline uppercase leading-none transition-[filter] hover:brightness-[0.97] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#232323] sm:h-[min(calc(var(--hero-vw)*0.0479),var(--hero-cta-max-h))] sm:min-h-0 sm:max-w-[var(--hero-cta-max-w)] sm:rounded-[20px] sm:py-0 sm:px-0"
       >
         <ShadowText
           className="header-nav-font header-nav-font--cta"

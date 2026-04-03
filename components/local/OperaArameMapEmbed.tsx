@@ -27,10 +27,10 @@ export function OperaArameMapEmbed() {
     <div className="relative overflow-hidden rounded-3xl border-[3px] border-arena-ink bg-white/60 shadow-sticker-sm">
       <motion.div
         className="absolute right-0 top-0 z-10 h-24 w-24 rounded-bl-full bg-arena-yellow/35"
-        initial={{ scale: 0 }}
-        whileInView={{ scale: 1 }}
+        initial={{ scale: 0, rotate: -20 }}
+        whileInView={{ scale: 1, rotate: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5, ease: EASE_OUT, delay: 0.15 }}
+        transition={{ type: "spring", stiffness: 200, damping: 14, delay: 0.2 }}
         aria-hidden
       />
       <div className="relative aspect-4/3 w-full min-h-[220px] sm:aspect-video sm:min-h-[280px]">

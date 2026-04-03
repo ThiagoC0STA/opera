@@ -34,7 +34,7 @@ export function FloatWrap({
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, scale: 0.92, rotate: rotate - 4 }}
+      initial={{ opacity: 0, scale: 0.4, rotate: rotate - 10 }}
       animate={{
         opacity: 1,
         scale: 1,
@@ -42,18 +42,19 @@ export function FloatWrap({
         y: [0, -yRange, 0],
       }}
       transition={{
-        opacity: { delay: entranceDelay, duration: 0.45 },
+        opacity: { delay: entranceDelay, duration: 0.4 },
         scale: {
           delay: entranceDelay,
           type: "spring",
-          stiffness: 260,
-          damping: 22,
+          stiffness: 200,
+          damping: 14,
+          mass: 0.7,
         },
         rotate: {
           delay: entranceDelay,
           type: "spring",
-          stiffness: 180,
-          damping: 16,
+          stiffness: 160,
+          damping: 12,
         },
         y: {
           delay: entranceDelay + floatDelay + 0.2,
@@ -63,9 +64,10 @@ export function FloatWrap({
         },
       }}
       whileHover={{
-        scale: hoverScale,
+        scale: hoverScale * 1.04,
         rotate: rotate + hoverRotate,
-        transition: { type: "spring", stiffness: 420, damping: 18 },
+        y: -yRange * 1.5,
+        transition: { type: "spring", stiffness: 420, damping: 14 },
       }}
       {...rest}
     >

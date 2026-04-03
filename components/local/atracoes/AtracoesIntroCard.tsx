@@ -36,10 +36,15 @@ export function AtracoesIntroCard() {
   return (
     <motion.div
       className="relative mb-12 overflow-hidden rounded-[24px] border-4 border-[#232323] bg-white sm:mb-16 sm:rounded-[28px]"
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.55, ease: EASE_OUT }}
+      initial={{ opacity: 0, y: 50, scale: 0.93, rotate: -0.8 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{
+        type: "spring",
+        stiffness: 110,
+        damping: 18,
+        mass: 1,
+      }}
     >
       <div
         className="flex h-[7px] w-full"

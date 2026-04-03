@@ -40,10 +40,14 @@ export function Badge({
   if (immediate) {
     return (
       <motion.span
-        initial={{ opacity: 0, scale: 0.85, rotate: rotate - 5 }}
+        initial={{ opacity: 0, scale: 0.3, rotate: rotate - 12 }}
         animate={{ opacity: 1, scale: 1, rotate }}
-        transition={{ type: "spring", stiffness: 320, damping: 22 }}
-        whileHover={{ scale: 1.06, rotate: rotate + 3 }}
+        transition={{ type: "spring", stiffness: 300, damping: 14, mass: 0.6 }}
+        whileHover={{
+          scale: 1.12,
+          rotate: rotate + 5,
+          transition: { type: "spring", stiffness: 400, damping: 14 },
+        }}
         className={`${motionClass} ${toneClasses[tone]} ${className}`}
       >
         <ShadowText style={PLAYFUL_SHADOW_TEXT_STYLE}>{children}</ShadowText>
@@ -53,11 +57,15 @@ export function Badge({
 
   return (
     <motion.span
-      initial={{ opacity: 0, scale: 0.8, rotate: rotate - 4 }}
+      initial={{ opacity: 0, scale: 0.3, rotate: rotate - 10 }}
       whileInView={{ opacity: 1, scale: 1, rotate }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ type: "spring", stiffness: 320, damping: 22 }}
-      whileHover={{ scale: 1.06, rotate: rotate + 3 }}
+      transition={{ type: "spring", stiffness: 300, damping: 14, mass: 0.6 }}
+      whileHover={{
+        scale: 1.12,
+        rotate: rotate + 5,
+        transition: { type: "spring", stiffness: 400, damping: 14 },
+      }}
       className={`${motionClass} ${toneClasses[tone]} ${className}`}
     >
       <ShadowText style={PLAYFUL_SHADOW_TEXT_STYLE}>{children}</ShadowText>

@@ -38,7 +38,7 @@ function FloatAsset({
   return (
     <motion.div
       className={`pointer-events-none absolute ${wrapperClass}`}
-      initial={{ opacity: 0, scale: 0.94 }}
+      initial={{ opacity: 0, scale: 0.5, rotate: -rotate * 3 }}
       animate={{
         opacity: 1,
         scale: 1,
@@ -46,16 +46,22 @@ function FloatAsset({
         rotate: [-rotate, rotate, -rotate],
       }}
       transition={{
-        opacity: { delay, duration: 0.45 },
-        scale: { delay, type: "spring", stiffness: 180, damping: 18 },
+        opacity: { delay, duration: 0.5 },
+        scale: {
+          delay,
+          type: "spring",
+          stiffness: 140,
+          damping: 14,
+          mass: 0.9,
+        },
         y: {
-          delay: delay + 0.08,
+          delay: delay + 0.15,
           duration: dur,
           repeat: Infinity,
           ease: "easeInOut",
         },
         rotate: {
-          delay: delay + 0.08,
+          delay: delay + 0.15,
           duration: dur + 1.2,
           repeat: Infinity,
           ease: "easeInOut",

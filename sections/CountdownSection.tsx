@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import Link from "next/link";
-import { motion, type Variants } from "framer-motion";
+import { motion, useInView, type Variants } from "framer-motion";
+import CountUp from "react-countup";
 import { Section } from "@/components/Section";
 import { HEADER_GLYPH_STYLE, ShadowText } from "@/components/ShadowText";
 import { CountdownSectionDecor } from "@/components/local/countdown/CountdownSectionDecor";
@@ -28,50 +29,67 @@ type CountBlockProps = {
 };
 
 const countBlockContainerVariants: Variants = {
-  hidden: { opacity: 0, y: 18 },
+  hidden: { opacity: 0, y: 40, scale: 0.8, rotate: -3 },
   show: {
     opacity: 1,
     y: 0,
+    scale: 1,
+    rotate: 0,
     transition: {
       type: "spring",
-      stiffness: 260,
-      damping: 26,
-      staggerChildren: 0.1,
-      delayChildren: 0.04,
+      stiffness: 200,
+      damping: 18,
+      mass: 0.8,
     },
   },
 };
 
-const countBlockNumberVariants: Variants = {
-  hidden: { scale: 0.45, opacity: 0 },
-  show: {
-    scale: 1,
-    opacity: 1,
-    transition: { type: "spring", stiffness: 420, damping: 22, mass: 0.65 },
-  },
-};
-
 const countBlockLabelVariants: Variants = {
-  hidden: { opacity: 0, y: 6 },
+  hidden: { opacity: 0, y: 12, scale: 0.8 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.4, ease: EASE_OUT },
+    scale: 1,
+    transition: { type: "spring", stiffness: 200, damping: 20 },
   },
 };
 
-function CountBlock({ label, value }: CountBlockProps) {
+const COUNT_NUMBER_CLASS =
+  "origin-center inline-block min-w-[2ch] font-display text-5xl tabular-nums leading-none text-[#0A0A0A] sm:min-w-[2.5ch] sm:text-6xl md:text-7xl";
+
+const COUNT_UP_DURATION_SEC = 1.68;
+
+/** CountUp only mounts when the countdown card is in view (react-countup always starts on mount otherwise). */
+function CountNumber({ value, active }: { value: number; active: boolean }) {
+  if (!active) {
+    return (
+      <span className={COUNT_NUMBER_CLASS} aria-hidden>
+        0
+      </span>
+    );
+  }
+  return (
+    <CountUp
+      className={COUNT_NUMBER_CLASS}
+      start={0}
+      end={value}
+      duration={COUNT_UP_DURATION_SEC}
+      preserveValue
+      useEasing
+      decimals={0}
+    />
+  );
+}
+
+type CountBlockInnerProps = CountBlockProps & { digitsInView: boolean };
+
+function CountBlock({ label, value, digitsInView: digitsActive }: CountBlockInnerProps) {
   return (
     <motion.div
       className="flex min-w-[min(28vw,140px)] flex-1 flex-col items-center rounded-2xl border-[3px] border-[#0A0A0A] bg-white px-4 py-6 sm:min-w-[160px] sm:px-6 sm:py-8"
       variants={countBlockContainerVariants}
     >
-      <motion.span
-        className="origin-center font-display text-5xl tabular-nums leading-none text-[#0A0A0A] sm:text-6xl md:text-7xl"
-        variants={countBlockNumberVariants}
-      >
-        {value}
-      </motion.span>
+      <CountNumber active={digitsActive} value={value} />
       <motion.span
         className="mt-3 font-condensed text-xs uppercase tracking-[0.22em] text-[#0A0A0A] sm:text-sm"
         variants={countBlockLabelVariants}
@@ -105,6 +123,12 @@ export function CountdownSection() {
     [],
   );
   const { days, hours, minutes } = useCountdownTo(targetMs, 1000);
+  const countdownCardRef = useRef<HTMLDivElement>(null);
+  const digitsInView = useInView(countdownCardRef, {
+    once: true,
+    margin: "-10% 0px -10% 0px",
+    amount: 0.25,
+  });
 
   return (
     <Section
@@ -138,11 +162,18 @@ export function CountdownSection() {
         </motion.div>
 
         <motion.div
+          ref={countdownCardRef}
           className="mx-auto mt-10 max-w-3xl rounded-2xl border-[3px] border-[#0A0A0A] bg-[#FFF8DC] px-4 py-8 sm:mt-12 sm:rounded-3xl sm:px-8 sm:py-10"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 50, scale: 0.9 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.55, ease: EASE_OUT, delay: 0.08 }}
+          transition={{
+            type: "spring",
+            stiffness: 120,
+            damping: 16,
+            mass: 1,
+            delay: 0.1,
+          }}
         >
           <motion.div
             className="flex flex-wrap items-stretch justify-center gap-4 sm:gap-6 md:gap-8"
@@ -151,9 +182,13 @@ export function CountdownSection() {
             whileInView="show"
             viewport={{ once: true, margin: "-20px" }}
           >
-            <CountBlock label="Dias" value={days} />
-            <CountBlock label="Horas" value={hours} />
-            <CountBlock label="Minutos" value={minutes} />
+            <CountBlock digitsInView={digitsInView} label="Dias" value={days} />
+            <CountBlock digitsInView={digitsInView} label="Horas" value={hours} />
+            <CountBlock
+              digitsInView={digitsInView}
+              label="Minutos"
+              value={minutes}
+            />
           </motion.div>
         </motion.div>
 
@@ -166,7 +201,7 @@ export function CountdownSection() {
         >
           <Link
             href="#cta"
-            className="box-border inline-flex h-[69px] w-[min(323px,calc(100%-1.5rem))] max-w-full shrink-0 items-center justify-center rounded-[20px] border-2 border-solid border-[#232323] bg-[#00A651] text-white transition-[filter] hover:brightness-[1.05] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#232323] no-underline"
+            className="animate-pulse-glow box-border inline-flex h-[69px] w-[min(323px,calc(100%-1.5rem))] max-w-full shrink-0 items-center justify-center rounded-[20px] border-2 border-solid border-[#232323] bg-[#00A651] text-white transition-[filter] hover:brightness-[1.05] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#232323] no-underline"
           >
             <ShadowText style={countdownCtaLabelStyle}>CADASTRE-SE</ShadowText>
           </Link>

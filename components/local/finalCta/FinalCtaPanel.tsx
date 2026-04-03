@@ -25,10 +25,15 @@ export function FinalCtaPanel({ className = "" }: { className?: string }) {
   return (
     <motion.article
       className={`relative z-10 w-full rounded-[28px] border-2 border-[#232323] bg-[#FFFFFF1A] px-6 py-10 text-center shadow-none sm:rounded-[32px] sm:px-10 sm:py-12 md:px-12 md:py-12 ${className}`}
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 50, scale: 0.92, rotate: -1 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.55, ease: EASE_OUT }}
+      transition={{
+        type: "spring",
+        stiffness: 120,
+        damping: 18,
+        mass: 1,
+      }}
     >
       <motion.div
         variants={sectionStagger}
@@ -59,7 +64,7 @@ export function FinalCtaPanel({ className = "" }: { className?: string }) {
         <motion.div className="mt-9 sm:mt-10" variants={fadeUp}>
           <Link
             href={CTA_HREF}
-            className="box-border inline-flex h-[69px] w-[min(323px,calc(100%-1.5rem))] max-w-full shrink-0 items-center justify-center rounded-[20px] border-2 border-solid border-[#232323] bg-[#FFBE3B] text-white no-underline transition-[filter] hover:brightness-[1.05] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#232323]"
+            className="animate-pulse-glow box-border inline-flex h-[69px] w-[min(323px,calc(100%-1.5rem))] max-w-full shrink-0 items-center justify-center rounded-[20px] border-2 border-solid border-[#232323] bg-[#FFBE3B] text-white no-underline transition-[filter] hover:brightness-[1.05] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#232323]"
           >
             <ShadowText style={finalCtaGlyphStyle}>CADASTRE-SE</ShadowText>
           </Link>

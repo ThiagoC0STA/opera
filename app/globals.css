@@ -148,6 +148,107 @@ body, html {
   box-shadow: var(--sticker-shadow-lg);
 }
 
+/* ── Plant / decor entrance & idle animations ── */
+@keyframes plant-sway {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(1.8deg); }
+  75% { transform: rotate(-1.5deg); }
+}
+
+@keyframes plant-sway-reverse {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-1.8deg); }
+  75% { transform: rotate(1.5deg); }
+}
+
+@keyframes leaf-shimmer {
+  0%, 100% { filter: brightness(1) saturate(1); }
+  50% { filter: brightness(1.08) saturate(1.12); }
+}
+
+@keyframes gentle-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes confetti-drift {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  33% { transform: translateY(-6px) rotate(2deg); }
+  66% { transform: translateY(3px) rotate(-1.5deg); }
+}
+
+@keyframes trophy-gleam {
+  0%, 100% { filter: brightness(1) drop-shadow(3px 4px 0 #0a0a0a); }
+  50% { filter: brightness(1.15) drop-shadow(3px 4px 6px rgba(255,190,59,0.4)); }
+}
+
+@keyframes ball-bounce-idle {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  40% { transform: translateY(-5px) rotate(3deg); }
+  70% { transform: translateY(2px) rotate(-1deg); }
+}
+
+@keyframes flag-wave {
+  0%, 100% { transform: rotate(0deg) scaleX(1); }
+  25% { transform: rotate(2deg) scaleX(1.02); }
+  50% { transform: rotate(-1deg) scaleX(0.98); }
+  75% { transform: rotate(1.5deg) scaleX(1.01); }
+}
+
+@keyframes macaw-hover {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  30% { transform: translateY(-6px) rotate(0.8deg); }
+  60% { transform: translateY(-2px) rotate(-0.5deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,190,59,0); }
+  50% { box-shadow: 0 0 24px 4px rgba(255,190,59,0.25); }
+}
+
+.animate-plant-sway {
+  animation: plant-sway 4s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.animate-plant-sway-reverse {
+  animation: plant-sway-reverse 4.5s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.animate-leaf-shimmer {
+  animation: leaf-shimmer 3s ease-in-out infinite;
+}
+
+.animate-gentle-float {
+  animation: gentle-float 3.5s ease-in-out infinite;
+}
+
+.animate-confetti-drift {
+  animation: confetti-drift 5s ease-in-out infinite;
+}
+
+.animate-trophy-gleam {
+  animation: trophy-gleam 3s ease-in-out infinite;
+}
+
+.animate-ball-bounce {
+  animation: ball-bounce-idle 3.2s ease-in-out infinite;
+}
+
+.animate-flag-wave {
+  animation: flag-wave 3.8s ease-in-out infinite;
+  transform-origin: top left;
+}
+
+.animate-macaw-hover {
+  animation: macaw-hover 4s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2.5s ease-in-out infinite;
+}
+
 /* Subtle film grain for poster-style heroes */
 .hero-noise {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");

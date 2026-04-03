@@ -43,13 +43,13 @@ export function PosterCard({
   const tilt = index % 2 === 0 ? -1.5 : 1.2;
 
   const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 52, rotate: tilt * 2.2, scale: 0.93 },
+    hidden: { opacity: 0, y: 70, rotate: tilt * 3, scale: 0.8 },
     show: {
       opacity: 1,
       y: 0,
       rotate: tilt,
       scale: 1,
-      transition: { type: "spring", stiffness: 260, damping: 26 },
+      transition: { type: "spring", stiffness: 180, damping: 18, mass: 0.9 },
     },
   };
 
@@ -57,13 +57,13 @@ export function PosterCard({
     <motion.article
       variants={cardVariants}
       whileHover={{
-        y: -12,
-        rotate: tilt + (index % 2 === 0 ? -2.5 : 2.5),
-        scale: 1.02,
-        boxShadow: "8px 10px 0 #0a0a0a",
+        y: -18,
+        rotate: tilt + (index % 2 === 0 ? -3 : 3),
+        scale: 1.04,
+        boxShadow: "10px 14px 0 #0a0a0a",
       }}
-      whileTap={{ scale: 0.98 }}
-      transition={{ type: "spring", stiffness: 380, damping: 22 }}
+      whileTap={{ scale: 0.96 }}
+      transition={{ type: "spring", stiffness: 350, damping: 18, mass: 0.7 }}
       className={`group relative flex flex-col overflow-hidden rounded-2xl border-[3px] border-arena-ink bg-arena-cream shadow-sticker ${className}`}
     >
       <span
