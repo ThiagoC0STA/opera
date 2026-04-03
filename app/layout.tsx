@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Alexandria, Anton, Bebas_Neue, DM_Sans, Lilita_One, Luckiest_Guy } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const bebasNeue = Bebas_Neue({
@@ -106,6 +107,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col overflow-x-hidden font-sans">
         {children}
+        <Analytics />
       </body>
     </html>
   );
