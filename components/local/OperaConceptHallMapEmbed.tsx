@@ -7,22 +7,25 @@ import {
 } from "@/components/ShadowText";
 import { EASE_OUT } from "@/components/motion/presets";
 
-/** WGS84 — Ópera de Arame (Parque das Pedreiras), Curitiba */
-const MAP_LAT = -25.4206;
-const MAP_LON = -49.2733;
+/** WGS84 — Ópera Concept Hall, Santa Felicidade, Curitiba */
+const MAP_LAT = -25.40224;
+const MAP_LON = -49.32766;
 
 const OSM_EMBED_SRC = `https://www.openstreetmap.org/export/embed.html?bbox=${encodeURIComponent(
   `${MAP_LON - 0.006},${MAP_LAT - 0.004},${MAP_LON + 0.006},${MAP_LAT + 0.004}`,
 )}&layer=mapnik&marker=${MAP_LAT},${MAP_LON}`;
 
+const VENUE_ADDRESS_LINE =
+  "R. Via Veneto, 505 - Santa Felicidade, Curitiba - PR, 82020-470";
+
 const GOOGLE_DIRECTIONS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-  "Ópera de Arame, Rua João Gava 920, Abranches, Curitiba PR",
+  `Ópera Concept Hall, ${VENUE_ADDRESS_LINE}`,
 )}`;
 
 /**
- * Embedded map + address for Ópera de Arame (Local section).
+ * Embedded map + address for Ópera Concept Hall (Local section).
  */
-export function OperaArameMapEmbed() {
+export function OperaConceptHallMapEmbed() {
   return (
     <div className="relative overflow-hidden rounded-3xl border-[3px] border-arena-ink bg-white/60 shadow-sticker-sm">
       <motion.div
@@ -35,7 +38,7 @@ export function OperaArameMapEmbed() {
       />
       <div className="relative aspect-4/3 w-full min-h-[220px] sm:aspect-video sm:min-h-[280px]">
         <iframe
-          title="Mapa — Ópera de Arame, Curitiba"
+          title="Mapa — Ópera Concept Hall, Curitiba"
           src={OSM_EMBED_SRC}
           className="absolute inset-0 h-full w-full border-0 grayscale-[0.15] contrast-[1.02]"
           loading="lazy"
@@ -47,10 +50,16 @@ export function OperaArameMapEmbed() {
           Endereço
         </p>
         <p className="mt-2 font-sans text-base font-medium leading-snug text-arena-ink sm:text-lg">
-          Rua João Gava, 920 — Abranches
-          <span className="mt-1 block text-arena-ink/85">
-            Curitiba — PR · Parque das Pedreiras (Ópera de Arame)
-          </span>
+          {VENUE_ADDRESS_LINE}
+          <span className="mt-2 block text-arena-ink/85">Ópera Concept Hall</span>
+        </p>
+        <p className="mt-3 font-sans text-sm text-arena-ink/80">
+          <a
+            href="tel:+5541988826777"
+            className="font-medium text-arena-header-green underline-offset-2 hover:underline"
+          >
+            (41) 98882-6777
+          </a>
         </p>
         <a
           href={GOOGLE_DIRECTIONS_URL}

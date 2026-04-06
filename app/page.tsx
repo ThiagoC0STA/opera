@@ -19,18 +19,19 @@ const SITE_URL =
 const EVENT_VENUE = {
   "@type": "Place",
   name: "Ópera Concept Hall",
+  telephone: "+55-41-98882-6777",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Rua João Gava, 920 — Abranches",
+    streetAddress: "R. Via Veneto, 505 - Santa Felicidade",
     addressLocality: "Curitiba",
     addressRegion: "PR",
-    postalCode: "82130-010",
+    postalCode: "82020-470",
     addressCountry: "BR",
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: -25.4206,
-    longitude: -49.2733,
+    latitude: -25.40224,
+    longitude: -49.32766,
   },
 };
 

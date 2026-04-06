@@ -68,6 +68,15 @@ export function SignupForm() {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setMessage(null);
+
+    if (!consent) {
+      setStatus("error");
+      setMessage(
+        "Marque a caixa de autorização de comunicação para enviar o cadastro.",
+      );
+      return;
+    }
+
     setStatus("submitting");
 
     try {
@@ -231,24 +240,38 @@ export function SignupForm() {
             required
           />
         </div>
-        <div className="flex gap-3 pt-1">
-          <input
-            id="lead-consent"
-            name="consent"
-            type="checkbox"
-            checked={consent}
-            onChange={(ev) => setConsent(ev.target.checked)}
-            required
-            className="mt-1 size-4 shrink-0 rounded border-2 border-[#232323] accent-[#00A651]"
-          />
-          <label
-            htmlFor="lead-consent"
-            className="font-sans text-sm leading-relaxed text-[#0A0A0A]/90"
-          >
-            Aceito receber informações sobre pré-venda, ingressos e novidades da
-            Arena Ópera por e-mail ou WhatsApp, e declaro que os dados acima são
-            verdadeiros.
-          </label>
+        <div className="pt-1">
+          <p className="font-sans text-sm font-medium text-[#0A0A0A]">
+            Autorização de comunicação{" "}
+            <span className="text-arena-red" aria-hidden>
+              *
+            </span>
+            <span className="sr-only">(obrigatório)</span>
+          </p>
+          <div className="mt-2 flex gap-3">
+            <input
+              id="lead-consent"
+              name="consent"
+              type="checkbox"
+              checked={consent}
+              onChange={(ev) => setConsent(ev.target.checked)}
+              required
+              aria-required="true"
+              className="mt-1 size-4 shrink-0 rounded border-2 border-[#232323] accent-[#00A651]"
+            />
+            <label
+              htmlFor="lead-consent"
+              className="font-sans text-sm leading-relaxed text-[#0A0A0A]/90"
+            >
+              Declaro que os dados acima são verdadeiros e autorizo receber, por
+              e-mail ou WhatsApp, informações sobre pré-venda, ingressos e
+              novidades da Arena Ópera.{" "}
+              <strong className="font-semibold text-[#0A0A0A]">
+                Marcar esta caixa é obrigatório
+              </strong>{" "}
+              para concluir o cadastro.
+            </label>
+          </div>
         </div>
       </div>
 

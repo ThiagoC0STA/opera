@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Section } from "@/components/Section";
 import { LocalSectionCornerArt } from "@/components/local/LocalSectionCornerArt";
 import { LocalSectionPillTag } from "@/components/local/LocalSectionPillTag";
-import { OperaArameMapEmbed } from "@/components/local/OperaArameMapEmbed";
+import { OperaConceptHallMapEmbed } from "@/components/local/OperaConceptHallMapEmbed";
 import { fadeUp, sectionStagger } from "@/components/motion/presets";
 
 export function LocalSection() {
@@ -30,7 +30,7 @@ export function LocalSection() {
           </h2>
           <p className="mt-6 max-w-lg font-sans text-base text-arena-ink/85 sm:text-md">
             O Ópera Concept Hall é um espaço multifuncional de alto padrão
-            no bairro de Santa Felicidade, em Curitiba — sede da Arena Ópera
+            no bairro de Santa Felicidade, em Curitiba, sede da Arena Ópera
             durante a Copa do Mundo 2026. O local é reconhecido por sua
             arquitetura imponente, pensado para você chegar tranquilo, circular
             com segurança e aproveitar a noite inteira sem preocupações.
@@ -38,7 +38,7 @@ export function LocalSection() {
         </motion.div>
 
         <motion.div variants={fadeUp}>
-          <OperaArameMapEmbed />
+          <OperaConceptHallMapEmbed />
         </motion.div>
       </motion.div>
     </Section>
