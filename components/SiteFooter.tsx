@@ -11,7 +11,7 @@ export function SiteFooter() {
       role="contentinfo"
     >
       <motion.div
-        className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-8 px-4 sm:flex-row sm:px-6 lg:px-8"
+        className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-8 px-4 sm:flex-row sm:items-center sm:px-6 lg:px-8"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-20px" }}
@@ -46,7 +46,7 @@ export function SiteFooter() {
             </Link>
           </nav>
         </div>
-        <p className="max-w-md text-center text-sm text-white/60 sm:text-left">
+        <p className="max-w-md text-left text-sm text-white/60">
           © {new Date().getFullYear()} Arena Ópera. Ópera Concept Hall, Curitiba,
           PR.
         </p>

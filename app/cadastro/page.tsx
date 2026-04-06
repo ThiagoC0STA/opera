@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { HeaderCornerPlants } from "@/components/HeaderCornerPlants";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -11,6 +10,10 @@ const SITE_URL =
   /^https?:\/\//i.test(process.env.NEXT_PUBLIC_SITE_URL)
     ? process.env.NEXT_PUBLIC_SITE_URL
     : "https://www.arenaopera.com.br";
+
+/** Intro copy under the cadastro heading (single source of truth). */
+const CADASTRO_INTRO_COPY =
+  "Preencha os dados abaixo para ser avisado sobre ingressos e benefícios da pré-venda das festas do Ópera Concept Hall.";
 
 export const metadata: Metadata = {
   title: "Cadastro na pré-venda · Arena Ópera",
@@ -42,21 +45,11 @@ export default function CadastroPage() {
             <span className="text-arena-header-green">Arena Ópera</span>
           </h1>
           <p className="mx-auto mt-5 max-w-md text-center font-sans text-sm leading-relaxed text-arena-ink/85 sm:text-base">
-            Preencha os dados abaixo. Você será avisado sobre ingressos e
-            benefícios da pré-venda das festas da Copa do Mundo 2026 no Ópera
-            Concept Hal Copa do Mundo 2026 no Ópera Concept Hall.
+            {CADASTRO_INTRO_COPY}
           </p>
           <div className="mt-10">
             <SignupForm />
           </div>
-          <p className="mt-10 text-center font-sans text-sm text-arena-ink/60">
-            <Link
-              href="/"
-              className="font-medium text-arena-header-green underline-offset-4 hover:underline"
-            >rtem 
-              Voltar ao site
-            </Link>
-          </p>
         </CadastroHeroVisuals>
       </main>
       <SiteFooter />

@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, type FormEvent, type ReactNode } from "react";
+import { Button } from "@/components/Button";
 import {
   BRAZIL_PHONE_MASK_MAX_LEN,
   formatBrazilPhoneInput,
 } from "@/components/local/leadForm/phoneInput";
+import { SignupSuccessPanel } from "@/components/local/leadForm/SignupSuccessPanel";
 import { celebrateLeadSignup } from "@/lib/confettiCelebration";
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
@@ -107,15 +109,33 @@ export function SignupForm() {
   if (status === "success") {
     return (
       <div
-        className="rounded-2xl border-[3px] border-[#0A0A0A] bg-[#FFF8DC] px-6 py-10 text-center shadow-[var(--sticker-shadow)]"
-        role="status"
+        className="relative w-full max-w-none"
+        style={{
+          /* Break out of max-w-lg so % bottom matches CadastroDecorLayer (inset-0 on hero). */
+          width: "100vw",
+          marginLeft: "calc(50% - 50vw)",
+          marginRight: "calc(50% - 50vw)",
+          minHeight:
+            "calc(100dvh - var(--site-header-height) - 9rem)",
+        }}
       >
-        <p className="font-display text-2xl uppercase tracking-wide text-[#0A0A0A]">
-          Obrigado!
-        </p>
-        <p className="mt-4 font-sans text-base leading-relaxed text-[#0A0A0A]/90">
-          {message}
-        </p>
+        <div className="relative z-10 mx-auto w-full max-w-lg px-4 sm:px-6 lg:max-w-xl lg:px-8">
+          <SignupSuccessPanel
+            message={message ?? "Cadastro enviado com sucesso."}
+          />
+        </div>
+        <div className="pointer-events-none absolute bottom-[26%] left-1/2 z-20 flex w-full -translate-x-1/2 justify-center px-4 sm:bottom-[30%]">
+          <div className="pointer-events-auto">
+            <Button
+              href="/"
+              variant="primary"
+              size="md"
+              className="min-h-[48px] min-w-[min(100%,220px)] max-w-[280px] px-5 text-base sm:min-h-[52px] sm:px-8 sm:text-lg"
+            >
+              Voltar ao site
+            </Button>
+          </div>
+        </div>
       </div>
     );
   }
