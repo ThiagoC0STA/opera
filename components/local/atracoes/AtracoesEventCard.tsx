@@ -155,7 +155,7 @@ export const atracoesJo = {
 };
 
 export const atracoesWoods = {
-  topImageSrc: `${ASSET}/woods.png`,
+  topImageSrc: `${ASSET}/woods.svg`,
   topImageWidth: 163,
   topImageHeight: 173,
   topImageAlt: "Wood's",
