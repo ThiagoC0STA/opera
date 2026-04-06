@@ -78,6 +78,13 @@ export function isValidBirthDateIso(birthDate: string, minAgeYears: number): boo
   return age >= minAgeYears;
 }
 
+/** YYYY-MM-DD (from `<input type="date">`) to DD/MM/YYYY for spreadsheets. */
+export function formatBirthDateBr(isoDate: string): string {
+  if (!ISO_DATE.test(isoDate)) return isoDate;
+  const [y, m, d] = isoDate.split("-");
+  return `${d}/${m}/${y}`;
+}
+
 export const GENDER_VALUES = [
   "female",
   "male",

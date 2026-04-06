@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import {
+  formatBirthDateBr,
   formatBrazilPhoneForDisplay,
   formatCpfDisplay,
   genderLabelPt,
@@ -132,7 +133,7 @@ export async function POST(request: Request) {
     phone: phoneDisplay,
     email,
     cpf: cpfFormatted,
-    birthDate,
+    birthDate: formatBirthDateBr(birthDate),
     gender: genderLabel,
     consentCommunications: true,
     submittedAt: new Date().toISOString(),

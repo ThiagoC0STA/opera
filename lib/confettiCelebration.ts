@@ -4,13 +4,20 @@ import confetti from "canvas-confetti";
 const COLORS = ["#FFBE3B", "#00A651", "#31613d", "#0057b7", "#e63946", "#ffffff"];
 
 /**
- * Short confetti burst after a successful lead signup (canvas-confetti).
+ * Scroll to top (form success shortens the page), then confetti (canvas-confetti).
  */
 export function celebrateLeadSignup() {
   if (typeof window === "undefined") return;
 
   const prefersReduced =
     window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: prefersReduced ? "auto" : "smooth",
+  });
+
   if (prefersReduced) return;
 
   const base = {
@@ -21,28 +28,32 @@ export function celebrateLeadSignup() {
     scalar: 1.05,
   } as const;
 
-  void confetti({
-    ...base,
-    particleCount: 130,
-    spread: 78,
-    startVelocity: 42,
-    origin: { x: 0.5, y: 0.58 },
-  });
+  const afterScrollMs = 480;
 
   window.setTimeout(() => {
     void confetti({
       ...base,
-      particleCount: 55,
-      angle: 55,
-      spread: 50,
-      origin: { x: 0.08, y: 0.62 },
+      particleCount: 130,
+      spread: 78,
+      startVelocity: 42,
+      origin: { x: 0.5, y: 0.58 },
     });
-    void confetti({
-      ...base,
-      particleCount: 55,
-      angle: 125,
-      spread: 50,
-      origin: { x: 0.92, y: 0.62 },
-    });
-  }, 180);
+
+    window.setTimeout(() => {
+      void confetti({
+        ...base,
+        particleCount: 55,
+        angle: 55,
+        spread: 50,
+        origin: { x: 0.08, y: 0.62 },
+      });
+      void confetti({
+        ...base,
+        particleCount: 55,
+        angle: 125,
+        spread: 50,
+        origin: { x: 0.92, y: 0.62 },
+      });
+    }, 180);
+  }, afterScrollMs);
 }
