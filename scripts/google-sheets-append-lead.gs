@@ -1,35 +1,38 @@
 /**
- * Google Apps Script: append lead rows to the active spreadsheet.
+ * Google Apps Script: one row per lead, exactly 6 columns (same order as the site payload).
  *
- * If you already have an old header row, replace row 1 with the new columns or use a new sheet tab.
+ * Columns A–F only:
+ *   Nome | Telefone | Email | CPF | Data de Nascimento | Gênero
+ *
+ * If "Nome" shows an ISO date, your Web App is still an OLD deployment (old script wrote
+ * submittedAt first). Fix: paste this whole file, Save, Deploy > Manage deployments >
+ * Edit > New version > Deploy. Then run writeHeadersRow1() once.
  *
  * Setup:
- * 1. Create a Google Sheet (or open your Excel file in Google Sheets via Drive).
- * 2. Extensions > Apps Script > paste this file > Save.
- * 3. Run `setupHeaderRow` once from the editor (authorize the script), or paste headers manually.
- * 4. Project Settings > Script properties > Add row:
- *    - Property: INGEST_SECRET
- *    - Value: (same random string as GOOGLE_SHEETS_INGEST_SECRET on your server)
- * 5. Deploy > New deployment > Type: Web app
- *    - Execute as: Me
- *    - Who has access: Anyone (or Anyone with Google account, if you prefer)
- * 6. Copy the Web app URL into GOOGLE_SHEETS_WEB_APP_URL in your hosting env.
+ * 1. Extensions > Apps Script > paste this file > Save.
+ * 2. Run writeHeadersRow1() once (overwrites row 1 with A–F headers only).
+ * 3. Script properties: INGEST_SECRET = same as GOOGLE_SHEETS_INGEST_SECRET on the server.
+ * 4. Deploy > Web app > new version each time you change code.
  */
+
+/** Writes exactly six headers to row 1 (columns A–F). */
+function writeHeadersRow1() {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  const headers = [
+    "Nome",
+    "Telefone",
+    "Email",
+    "CPF",
+    "Data de Nascimento",
+    "Gênero",
+  ];
+  sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+}
 
 function setupHeaderRow() {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   if (sheet.getLastRow() === 0) {
-    sheet.appendRow([
-      "Nome",
-      "Telefone",
-      "Email",
-      "CPF",
-      "Data de Nascimento",
-      "Gênero",
-      "Data envio (ISO)",
-      "Consentimento",
-      "Origem",
-    ]);
+    writeHeadersRow1();
   }
 }
 
@@ -44,6 +47,7 @@ function doPost(e) {
     }
 
     const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    // Must match A–F headers and the JSON fields sent by /api/leads (see route.ts).
     sheet.appendRow([
       data.fullName || "",
       data.phone || "",
@@ -51,9 +55,6 @@ function doPost(e) {
       data.cpf || "",
       data.birthDate || "",
       data.gender || "",
-      data.submittedAt || new Date().toISOString(),
-      data.consentCommunications === true ? "sim" : "nao",
-      data.source || "",
     ]);
 
     return jsonOut({ ok: true });

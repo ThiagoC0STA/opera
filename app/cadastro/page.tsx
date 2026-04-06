@@ -3,6 +3,7 @@ import Link from "next/link";
 import { HeaderCornerPlants } from "@/components/HeaderCornerPlants";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { CadastroHeroVisuals } from "@/components/local/cadastro/CadastroHeroVisuals";
 import { SignupForm } from "@/components/local/leadForm/SignupForm";
 
 const SITE_URL =
@@ -31,16 +32,16 @@ export default function CadastroPage() {
     <div className="relative flex min-h-full flex-1 flex-col bg-[#0f0f12]">
       <HeaderCornerPlants />
       <SiteHeader />
-      <main className="flex-1 bg-arena-cream">
-        <div className="mx-auto max-w-lg px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
-          <p className="text-center font-condensed text-xs uppercase tracking-[0.32em] text-[#0A0A0A]/70">
+      <main className="flex-1">
+        <CadastroHeroVisuals>
+          <p className="text-center font-condensed text-xs uppercase tracking-[0.32em] text-arena-ink/70">
             Pré-venda
           </p>
-          <h1 className="mt-3 text-center font-display text-[clamp(2rem,5vw,3rem)] uppercase leading-[0.98] tracking-tight text-[#0A0A0A]">
+          <h1 className="mt-3 text-center font-display text-[clamp(2rem,5vw,3rem)] uppercase leading-[0.98] tracking-tight text-arena-ink">
             Cadastre-se na{" "}
             <span className="text-arena-header-green">Arena Ópera</span>
           </h1>
-          <p className="mx-auto mt-5 max-w-md text-center font-sans text-sm leading-relaxed text-[#0A0A0A]/85 sm:text-base">
+          <p className="mx-auto mt-5 max-w-md text-center font-sans text-sm leading-relaxed text-arena-ink/85 sm:text-base">
             Preencha os dados abaixo. Você será avisado sobre ingressos e
             benefícios da pré-venda das festas da Copa do Mundo 2026 no Ópera
             Concept Hall.
@@ -48,7 +49,7 @@ export default function CadastroPage() {
           <div className="mt-10">
             <SignupForm />
           </div>
-          <p className="mt-10 text-center font-sans text-sm text-[#0A0A0A]/60">
+          <p className="mt-10 text-center font-sans text-sm text-arena-ink/60">
             <Link
               href="/"
               className="font-medium text-arena-header-green underline-offset-4 hover:underline"
@@ -56,7 +57,7 @@ export default function CadastroPage() {
               Voltar ao site
             </Link>
           </p>
-        </div>
+        </CadastroHeroVisuals>
       </main>
       <SiteFooter />
     </div>

@@ -3,7 +3,15 @@
 import { useMemo, useState, type FormEvent, type ReactNode } from "react";
 import type { GenderValue } from "@/lib/leadValidation";
 import { LeadGenderSelect } from "@/components/local/leadForm/LeadGenderSelect";
-import { formatCpfInput } from "@/components/local/leadForm/cpfInput";
+import {
+  CPF_MASK_MAX_LEN,
+  formatCpfInput,
+} from "@/components/local/leadForm/cpfInput";
+import {
+  BRAZIL_PHONE_MASK_MAX_LEN,
+  formatBrazilPhoneInput,
+} from "@/components/local/leadForm/phoneInput";
+import { celebrateLeadSignup } from "@/lib/confettiCelebration";
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
@@ -88,6 +96,7 @@ export function SignupForm() {
         return;
       }
 
+      celebrateLeadSignup();
       setStatus("success");
       setMessage("Cadastro enviado! Em breve entraremos em contato.");
       setFullName("");
@@ -149,10 +158,12 @@ export function SignupForm() {
             id="lead-phone"
             name="phone"
             type="tel"
+            inputMode="numeric"
             autoComplete="tel"
             required
+            maxLength={BRAZIL_PHONE_MASK_MAX_LEN}
             value={phone}
-            onChange={(ev) => setPhone(ev.target.value)}
+            onChange={(ev) => setPhone(formatBrazilPhoneInput(ev.target.value))}
             placeholder="(41) 99999-9999"
             className={`${fieldClass} placeholder:text-[#0A0A0A]/40`}
           />
@@ -183,6 +194,7 @@ export function SignupForm() {
             inputMode="numeric"
             autoComplete="off"
             required
+            maxLength={CPF_MASK_MAX_LEN}
             value={cpf}
             onChange={(ev) => setCpf(formatCpfInput(ev.target.value))}
             placeholder="000.000.000-00"
