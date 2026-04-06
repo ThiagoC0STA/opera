@@ -109,15 +109,7 @@ export function SignupForm() {
   if (status === "success") {
     return (
       <div
-        className="relative w-full max-w-none"
-        style={{
-          /* Break out of max-w-lg so % bottom matches CadastroDecorLayer (inset-0 on hero). */
-          width: "100vw",
-          marginLeft: "calc(50% - 50vw)",
-          marginRight: "calc(50% - 50vw)",
-          minHeight:
-            "calc(100dvh - var(--site-header-height) - 9rem)",
-        }}
+        className="relative ml-[calc(-50vw+50%)] min-h-[calc(100dvh-var(--site-header-height)-9rem)] w-screen max-w-[100vw]"
       >
         <div className="relative z-10 mx-auto w-full max-w-lg px-4 sm:px-6 lg:max-w-xl lg:px-8">
           <SignupSuccessPanel
