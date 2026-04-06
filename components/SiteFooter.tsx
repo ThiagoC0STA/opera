@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { EASE_OUT } from "@/components/motion/presets";
+import { FooterZhelloCredit } from "@/components/FooterZhelloCredit";
 
 export function SiteFooter() {
   return (
@@ -51,6 +51,7 @@ export function SiteFooter() {
           PR.
         </p>
       </motion.div>
+      <FooterZhelloCredit />
     </footer>
   );
 }

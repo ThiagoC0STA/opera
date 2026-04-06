@@ -53,7 +53,7 @@ export default function CadastroPage() {
             <Link
               href="/"
               className="font-medium text-arena-header-green underline-offset-4 hover:underline"
-            >
+            >rtem 
               Voltar ao site
             </Link>
           </p>

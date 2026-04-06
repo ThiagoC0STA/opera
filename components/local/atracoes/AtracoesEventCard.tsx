@@ -19,15 +19,18 @@ export type AtracoesEventCardProps = {
   /** 0 = tilt left, 1 = tilt right, 2 = tilt left (alternating). */
   index?: number;
   topImageSrc: string;
-  topImageWidth: number;
-  topImageHeight: number;
   topImageAlt: string;
   dateBadge?: string;
   bottomTone: BottomTone;
   title: string;
   lines: string[];
+  /** Optional extra classes on the image (box size is fixed for all cards). */
   imageClassName?: string;
 };
+
+/** Same viewport for every attraction icon so PNG/SVG scale consistently. */
+const TOP_ICON_BOX =
+  "relative z-2 mx-auto h-[132px] w-full max-w-[200px] sm:h-[152px] sm:max-w-[220px]";
 
 const titleStyle: CSSProperties = {
   fontFamily: "var(--font-f-display), system-ui, sans-serif",
@@ -67,14 +70,12 @@ const CARD_TILT_DEG = 1.1;
 export function AtracoesEventCard({
   index = 0,
   topImageSrc,
-  topImageWidth,
-  topImageHeight,
   topImageAlt,
   dateBadge,
   bottomTone,
   title,
   lines,
-  imageClassName = "relative z-2 max-h-[min(48vw,200px)] w-auto object-contain",
+  imageClassName = "",
 }: AtracoesEventCardProps) {
   const bottomBg =
     bottomTone === "green" ? "bg-[#00A651]" : "bg-white";
@@ -107,14 +108,16 @@ export function AtracoesEventCard({
             </div>
           ) : null}
           <div className="relative z-1 flex items-center justify-center px-4 pb-10 pt-14 sm:pb-12 sm:pt-16">
-            <Image
-              src={topImageSrc}
-              alt={topImageAlt}
-              width={topImageWidth}
-              height={topImageHeight}
-              className={imageClassName}
-              
-            />
+            <div className={TOP_ICON_BOX}>
+              <Image
+                src={topImageSrc}
+                alt={topImageAlt}
+                fill
+                sizes="(max-width: 640px) 200px, 220px"
+                unoptimized={/\.svg(\?|$)/i.test(topImageSrc)}
+                className={`object-contain object-center ${imageClassName}`.trim()}
+              />
+            </div>
           </div>
         </div>
         <div
@@ -142,8 +145,6 @@ export function AtracoesEventCard({
 
 export const atracoesJo = {
   topImageSrc: `${ASSET}/jo.png`,
-  topImageWidth: 113,
-  topImageHeight: 192,
   topImageAlt: "Baile do Jô",
   dateBadge: "13.06",
   bottomTone: "green" as const,
@@ -156,8 +157,6 @@ export const atracoesJo = {
 
 export const atracoesWoods = {
   topImageSrc: `${ASSET}/woods.svg`,
-  topImageWidth: 163,
-  topImageHeight: 173,
   topImageAlt: "Wood's",
   dateBadge: "19.06",
   bottomTone: "green" as const,
@@ -167,12 +166,8 @@ export const atracoesWoods = {
 
 export const atracoesMore = {
   topImageSrc: `${ASSET}/arena-black-and-white.png`,
-  topImageWidth: 166,
-  topImageHeight: 166,
   topImageAlt: "Arena Ópera",
   bottomTone: "white" as const,
   title: "E muito mais!",
   lines: ["Aguardem novidades de programação em breve"],
-  imageClassName:
-    "relative z-2 max-h-[min(48vw,200px)] w-auto object-contain",
 };
