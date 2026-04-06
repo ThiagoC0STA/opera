@@ -83,7 +83,7 @@ export function Hero() {
               </div>
 
               <div className="mb-4 flex w-full justify-center sm:mb-[min(calc(var(--hero-vw)*0.0319),46px)] sm:max-[1799px]:mb-8">
-                <HeroPrimaryCta href="#cta" />
+                <HeroPrimaryCta />
               </div>
 
               <div className="w-full">

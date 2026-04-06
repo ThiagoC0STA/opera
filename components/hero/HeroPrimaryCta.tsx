@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import type { CSSProperties } from "react";
 import { HEADER_GLYPH_STYLE, ShadowText } from "@/components/ShadowText";
+import { SIGNUP_ROUTE } from "@/lib/signupRoute";
 
 const ctaGlyphStyle: CSSProperties = {
   ...HEADER_GLYPH_STYLE,
@@ -17,10 +18,9 @@ type HeroPrimaryCtaProps = {
 };
 
 /**
- * Hero CTA — 252×69 ref, bg #FFEBD5, border 1px #232323.
- * Text uses ShadowText at 35px.
+ * Hero CTA: 252×69 ref, bg #FFEBD5, border 1px #232323. ShadowText at 35px.
  */
-export function HeroPrimaryCta({ href = "#cta" }: HeroPrimaryCtaProps) {
+export function HeroPrimaryCta({ href = SIGNUP_ROUTE }: HeroPrimaryCtaProps) {
   return (
     <motion.div
       className="w-full flex justify-center"

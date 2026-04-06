@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ShadowText } from "./ShadowText";
+import { SIGNUP_ROUTE } from "@/lib/signupRoute";
 
 const navLinkClass =
   "text-inherit no-underline px-0.5 py-1 uppercase transition-opacity hover:opacity-90 sm:px-1 flex-1 md:flex-none flex justify-center items-center";
@@ -17,13 +18,13 @@ export function SiteHeader() {
           aria-label="Navegação principal"
           className="mx-auto flex h-[60px] md:h-[87px] max-w-6xl flex-row flex-nowrap items-center justify-between md:justify-center gap-2 px-2 sm:gap-8 sm:px-6 md:gap-12 lg:px-8"
         >
-          <Link href="#atracoes" className={navLinkClass}>
+          <Link href="/#atracoes" className={navLinkClass}>
             <ShadowText className="header-nav-font">Atrações</ShadowText>
           </Link>
-          <Link href="#local" className={navLinkClass}>
+          <Link href="/#local" className={navLinkClass}>
             <ShadowText className="header-nav-font">Local</ShadowText>
           </Link>
-          <Link href="#cta" className={ctaClass}>
+          <Link href={SIGNUP_ROUTE} className={ctaClass}>
             <ShadowText className="header-nav-font header-nav-font--cta">
               Cadastre-se
             </ShadowText>

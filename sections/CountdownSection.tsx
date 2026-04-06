@@ -8,6 +8,7 @@ import CountUp from "react-countup";
 import { Section } from "@/components/Section";
 import { HEADER_GLYPH_STYLE, ShadowText } from "@/components/ShadowText";
 import { CountdownSectionDecor } from "@/components/local/countdown/CountdownSectionDecor";
+import { SIGNUP_ROUTE } from "@/lib/signupRoute";
 import { EASE_OUT, fadeUp, sectionStagger } from "@/components/motion/presets";
 
 /** First match moment — 13 June 2026, 17:00 Brasília. */
@@ -201,7 +202,7 @@ export function CountdownSection() {
           transition={{ duration: 0.45, ease: EASE_OUT, delay: 0.12 }}
         >
           <Link
-            href="#cta"
+            href={SIGNUP_ROUTE}
             className="animate-pulse-glow box-border inline-flex h-[69px] w-[min(323px,calc(100%-1.5rem))] max-w-full shrink-0 items-center justify-center rounded-[20px] border-2 border-solid border-[#232323] bg-[#00A651] text-white transition-[filter] hover:brightness-[1.05] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#232323] no-underline"
           >
             <ShadowText style={countdownCtaLabelStyle}>CADASTRE-SE</ShadowText>

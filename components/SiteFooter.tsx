@@ -27,19 +27,19 @@ export function SiteFooter() {
           </motion.p>
           <nav aria-label="Navegação do rodapé" className="mt-3 flex gap-4">
             <Link
-              href="#atracoes"
+              href="/#atracoes"
               className="text-sm text-white/60 no-underline transition-colors hover:text-white/90"
             >
               Atrações
             </Link>
             <Link
-              href="#local"
+              href="/#local"
               className="text-sm text-white/60 no-underline transition-colors hover:text-white/90"
             >
               Local
             </Link>
             <Link
-              href="#countdown"
+              href="/#countdown"
               className="text-sm text-white/60 no-underline transition-colors hover:text-white/90"
             >
               Contagem regressiva
@@ -47,8 +47,8 @@ export function SiteFooter() {
           </nav>
         </div>
         <p className="max-w-md text-center text-sm text-white/60 sm:text-left">
-          © {new Date().getFullYear()} Arena Ópera. Ópera Concept Hall —
-          Curitiba, PR.
+          © {new Date().getFullYear()} Arena Ópera. Ópera Concept Hall, Curitiba,
+          PR.
         </p>
       </motion.div>
     </footer>

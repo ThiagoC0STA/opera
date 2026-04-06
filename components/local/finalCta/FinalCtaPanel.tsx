@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { HEADER_GLYPH_STYLE, ShadowText } from "@/components/ShadowText";
 import { EASE_OUT, fadeUp, sectionStagger } from "@/components/motion/presets";
+import { SIGNUP_ROUTE } from "@/lib/signupRoute";
 
 /** Same glyph system as CountdownSection CTA; white fill on yellow button. */
 const finalCtaGlyphStyle = {
@@ -16,7 +17,7 @@ const finalCtaGlyphStyle = {
   leadingTrim: "none",
 } as CSSProperties;
 
-const CTA_HREF = process.env.NEXT_PUBLIC_FINAL_CTA_URL ?? "#";
+const CTA_HREF = process.env.NEXT_PUBLIC_FINAL_CTA_URL ?? SIGNUP_ROUTE;
 
 /**
  * Bordered panel: kicker, two-line headline, body, single yellow CTA (design reference).
@@ -58,7 +59,7 @@ export function FinalCtaPanel({ className = "" }: { className?: string }) {
           className="mx-auto mt-6 max-w-md font-sans text-sm leading-relaxed text-white sm:mt-7 sm:max-w-lg sm:text-base"
           variants={fadeUp}
         >
-          Garanta seu lugar na Arena Ópera — a melhor festa da Copa do Mundo
+          Garanta seu lugar na Arena Ópera, a melhor festa da Copa do Mundo
           2026 em Curitiba! Cadastre-se agora mesmo na pré-venda e garanta
           benefícios exclusivos antes que os ingressos esgotem.
         </motion.p>
