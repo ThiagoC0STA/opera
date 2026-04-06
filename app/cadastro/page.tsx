@@ -44,7 +44,7 @@ export default function CadastroPage() {
           <p className="mx-auto mt-5 max-w-md text-center font-sans text-sm leading-relaxed text-arena-ink/85 sm:text-base">
             Preencha os dados abaixo. Você será avisado sobre ingressos e
             benefícios da pré-venda das festas da Copa do Mundo 2026 no Ópera
-            Concept Hall.
+            Concept Hal Copa do Mundo 2026 no Ópera Concept Hall.
           </p>
           <div className="mt-10">
             <SignupForm />

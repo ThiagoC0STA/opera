@@ -1,12 +1,6 @@
 "use client";
 
-import { useMemo, useState, type FormEvent, type ReactNode } from "react";
-import type { GenderValue } from "@/lib/leadValidation";
-import { LeadGenderSelect } from "@/components/local/leadForm/LeadGenderSelect";
-import {
-  CPF_MASK_MAX_LEN,
-  formatCpfInput,
-} from "@/components/local/leadForm/cpfInput";
+import { useState, type FormEvent, type ReactNode } from "react";
 import {
   BRAZIL_PHONE_MASK_MAX_LEN,
   formatBrazilPhoneInput,
@@ -35,39 +29,32 @@ function FieldLabel({
   );
 }
 
-function localIsoDate(d: Date): string {
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, "0");
-  const day = String(d.getDate()).padStart(2, "0");
-  return `${y}-${m}-${day}`;
-}
-
 const fieldClass =
   "mt-2 w-full rounded-xl border-2 border-[#232323] bg-white px-4 py-3 font-sans text-base text-[#0A0A0A] outline-none ring-arena-yellow/40 transition-shadow focus-visible:ring-2";
 
+const checkClass =
+  "mt-1 size-4 shrink-0 rounded border-2 border-[#232323] accent-[#00A651]";
+
 export function SignupForm() {
   const [fullName, setFullName] = useState("");
-  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [cpf, setCpf] = useState("");
-  const [birthDate, setBirthDate] = useState("");
-  const [gender, setGender] = useState<GenderValue | "">("");
+  const [phone, setPhone] = useState("");
+  const [isAdult, setIsAdult] = useState(false);
   const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState<FormStatus>("idle");
   const [message, setMessage] = useState<string | null>(null);
 
-  const { birthMin, birthMax } = useMemo(() => {
-    const now = new Date();
-    const max = new Date(now);
-    max.setFullYear(max.getFullYear() - 18);
-    const min = new Date(now);
-    min.setFullYear(min.getFullYear() - 120);
-    return { birthMin: localIsoDate(min), birthMax: localIsoDate(max) };
-  }, []);
-
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setMessage(null);
+
+    if (!isAdult) {
+      setStatus("error");
+      setMessage(
+        "Confirme que você tem 18 anos ou mais para enviar o cadastro.",
+      );
+      return;
+    }
 
     if (!consent) {
       setStatus("error");
@@ -85,11 +72,9 @@ export function SignupForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           fullName,
-          phone,
           email,
-          cpf,
-          birthDate,
-          gender,
+          phone,
+          confirmsOver18: isAdult,
           consentCommunications: consent,
         }),
       });
@@ -109,11 +94,9 @@ export function SignupForm() {
       setStatus("success");
       setMessage("Cadastro enviado! Em breve entraremos em contato.");
       setFullName("");
-      setPhone("");
       setEmail("");
-      setCpf("");
-      setBirthDate("");
-      setGender("");
+      setPhone("");
+      setIsAdult(false);
       setConsent(false);
     } catch {
       setStatus("error");
@@ -160,6 +143,21 @@ export function SignupForm() {
           />
         </div>
         <div>
+          <FieldLabel htmlFor="lead-email" required>
+            E-mail
+          </FieldLabel>
+          <input
+            id="lead-email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            required
+            value={email}
+            onChange={(ev) => setEmail(ev.target.value)}
+            className={fieldClass}
+          />
+        </div>
+        <div>
           <FieldLabel htmlFor="lead-phone" required>
             Telefone (WhatsApp)
           </FieldLabel>
@@ -177,78 +175,31 @@ export function SignupForm() {
             className={`${fieldClass} placeholder:text-[#0A0A0A]/40`}
           />
         </div>
-        <div>
-          <FieldLabel htmlFor="lead-email" required>
-            E-mail
-          </FieldLabel>
-          <input
-            id="lead-email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            required
-            value={email}
-            onChange={(ev) => setEmail(ev.target.value)}
-            className={fieldClass}
-          />
-        </div>
-        <div>
-          <FieldLabel htmlFor="lead-cpf" required>
-            CPF
-          </FieldLabel>
-          <input
-            id="lead-cpf"
-            name="cpf"
-            type="text"
-            inputMode="numeric"
-            autoComplete="off"
-            required
-            maxLength={CPF_MASK_MAX_LEN}
-            value={cpf}
-            onChange={(ev) => setCpf(formatCpfInput(ev.target.value))}
-            placeholder="000.000.000-00"
-            className={`${fieldClass} placeholder:text-[#0A0A0A]/40`}
-          />
-        </div>
-        <div>
-          <FieldLabel htmlFor="lead-birth" required>
-            Data de nascimento
-          </FieldLabel>
-          <input
-            id="lead-birth"
-            name="birthDate"
-            type="date"
-            required
-            min={birthMin}
-            max={birthMax}
-            value={birthDate}
-            onChange={(ev) => setBirthDate(ev.target.value)}
-            className={fieldClass}
-          />
-          <p className="mt-1.5 font-sans text-xs text-[#0A0A0A]/65">
-            Evento para maiores de 18 anos.
-          </p>
-        </div>
-        <div>
-          <FieldLabel htmlFor="lead-gender" required>
-            Gênero
-          </FieldLabel>
-          <LeadGenderSelect
-            id="lead-gender"
-            value={gender}
-            onChange={setGender}
-            required
-          />
-        </div>
-        <div className="pt-1">
-          <p className="font-sans text-sm font-medium text-[#0A0A0A]">
-            Autorização de comunicação{" "}
-            <span className="text-arena-red" aria-hidden>
-              *
-            </span>
-            <span className="sr-only">(obrigatório)</span>
-          </p>
-          <div className="mt-2 flex gap-3">
+
+        <div className="space-y-4 pt-1">
+          <div className="flex gap-3">
+            <input
+              id="lead-adult"
+              name="adult"
+              type="checkbox"
+              checked={isAdult}
+              onChange={(ev) => setIsAdult(ev.target.checked)}
+              required
+              aria-required="true"
+              className={checkClass}
+            />
+            <label
+              htmlFor="lead-adult"
+              className="font-sans text-sm leading-relaxed text-[#0A0A0A]/90"
+            >
+              Confirmo que tenho{" "}
+              <strong className="font-semibold text-[#0A0A0A]">
+                18 anos ou mais
+              </strong>
+              . O evento é restrito a maiores de idade.
+            </label>
+          </div>
+          <div className="flex gap-3">
             <input
               id="lead-consent"
               name="consent"
@@ -257,18 +208,14 @@ export function SignupForm() {
               onChange={(ev) => setConsent(ev.target.checked)}
               required
               aria-required="true"
-              className="mt-1 size-4 shrink-0 rounded border-2 border-[#232323] accent-[#00A651]"
+              className={checkClass}
             />
             <label
               htmlFor="lead-consent"
               className="font-sans text-sm leading-relaxed text-[#0A0A0A]/90"
             >
-              Declaro que os dados acima são verdadeiros e autorizo receber, por
-              e-mail ou WhatsApp, informações sobre pré-venda, ingressos e
-              novidades da Arena Ópera.{" "}
-              <strong className="font-semibold text-[#0A0A0A]">
-                Marcar esta caixa é obrigatório
-              </strong>{" "}
+              Autorizo receber, por e-mail ou WhatsApp, informações sobre
+              pré-venda, ingressos e novidades da Arena Ópera. Obrigatório
               para concluir o cadastro.
             </label>
           </div>

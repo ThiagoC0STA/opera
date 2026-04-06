@@ -1,13 +1,7 @@
 import { NextResponse } from "next/server";
 import {
-  formatBirthDateBr,
   formatBrazilPhoneForDisplay,
-  formatCpfDisplay,
-  genderLabelPt,
-  isGenderValue,
-  isValidBirthDateIso,
   isValidBrazilPhone,
-  isValidCpf,
 } from "@/lib/leadValidation";
 
 const MAX_LEN = {
@@ -23,11 +17,9 @@ function isValidEmail(value: string): boolean {
 
 type LeadBody = {
   fullName?: unknown;
-  phone?: unknown;
   email?: unknown;
-  cpf?: unknown;
-  birthDate?: unknown;
-  gender?: unknown;
+  phone?: unknown;
+  confirmsOver18?: unknown;
   consentCommunications?: unknown;
 };
 
@@ -56,16 +48,19 @@ export async function POST(request: Request) {
 
   const fullName =
     typeof body.fullName === "string" ? body.fullName.trim() : "";
-  const phoneRaw = typeof body.phone === "string" ? body.phone.trim() : "";
   const email = typeof body.email === "string" ? body.email.trim() : "";
-  const cpfRaw = typeof body.cpf === "string" ? body.cpf.trim() : "";
-  const birthDate =
-    typeof body.birthDate === "string" ? body.birthDate.trim() : "";
-  const genderRaw = typeof body.gender === "string" ? body.gender.trim() : "";
+  const phoneRaw = typeof body.phone === "string" ? body.phone.trim() : "";
 
   if (fullName.length < 2 || fullName.length > MAX_LEN.fullName) {
     return NextResponse.json(
       { ok: false, error: "Informe seu nome completo." },
+      { status: 400 },
+    );
+  }
+
+  if (!isValidEmail(email)) {
+    return NextResponse.json(
+      { ok: false, error: "Informe um e-mail válido." },
       { status: 400 },
     );
   }
@@ -80,34 +75,12 @@ export async function POST(request: Request) {
     );
   }
 
-  if (!isValidEmail(email)) {
-    return NextResponse.json(
-      { ok: false, error: "Informe um e-mail válido." },
-      { status: 400 },
-    );
-  }
-
-  if (!isValidCpf(cpfRaw)) {
-    return NextResponse.json(
-      { ok: false, error: "Informe um CPF válido." },
-      { status: 400 },
-    );
-  }
-
-  if (!isValidBirthDateIso(birthDate, 18)) {
+  if (body.confirmsOver18 !== true) {
     return NextResponse.json(
       {
         ok: false,
-        error:
-          "Informe uma data de nascimento válida. É necessário ter 18 anos ou mais.",
+        error: "É necessário confirmar que você tem 18 anos ou mais.",
       },
-      { status: 400 },
-    );
-  }
-
-  if (!isGenderValue(genderRaw)) {
-    return NextResponse.json(
-      { ok: false, error: "Selecione uma opção de gênero." },
       { status: 400 },
     );
   }
@@ -125,19 +98,11 @@ export async function POST(request: Request) {
   const ingestSecret = process.env.GOOGLE_SHEETS_INGEST_SECRET?.trim() ?? "";
 
   const phoneDisplay = formatBrazilPhoneForDisplay(phoneRaw);
-  const cpfFormatted = formatCpfDisplay(cpfRaw);
-  const genderLabel = genderLabelPt(genderRaw);
 
-  const payload: Record<string, string | boolean> = {
+  const payload: Record<string, string> = {
     fullName,
-    phone: phoneDisplay,
     email,
-    cpf: cpfFormatted,
-    birthDate: formatBirthDateBr(birthDate),
-    gender: genderLabel,
-    consentCommunications: true,
-    submittedAt: new Date().toISOString(),
-    source: "arena-opera-site",
+    phone: phoneDisplay,
   };
 
   if (ingestSecret) {
