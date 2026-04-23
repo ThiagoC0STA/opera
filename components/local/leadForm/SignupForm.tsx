@@ -227,7 +227,7 @@ export function SignupForm() {
               className="font-sans text-sm leading-relaxed text-[#0A0A0A]/90"
             >
               Autorizo receber, por e-mail ou WhatsApp, informações sobre
-              pré-venda, ingressos e novidades da Arena Ópera. Obrigatório
+              ingressos, lotes e novidades da Arena Ópera. Obrigatório
               para concluir o cadastro.
             </label>
           </div>

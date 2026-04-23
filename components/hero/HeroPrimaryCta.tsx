@@ -8,9 +8,10 @@ import { SIGNUP_ROUTE } from "@/lib/signupRoute";
 
 const ctaGlyphStyle: CSSProperties = {
   ...HEADER_GLYPH_STYLE,
-  /** Floor ~20px on narrow phones; desktop scales with --hero-vw (capped on large monitors). */
-  fontSize: "clamp(1.25rem, calc(var(--hero-vw) * 0.0243 + 0.875rem), var(--hero-cta-text-max))",
+  /** Floor ~16px on narrow phones; desktop scales with --hero-vw (capped on large monitors). */
+  fontSize: "clamp(1rem, calc(var(--hero-vw) * 0.02 + 0.75rem), var(--hero-cta-text-max))",
   lineHeight: 1,
+  whiteSpace: "nowrap",
 };
 
 type HeroPrimaryCtaProps = {
@@ -30,13 +31,15 @@ export function HeroPrimaryCta({ href = SIGNUP_ROUTE }: HeroPrimaryCtaProps) {
     >
       <Link
         href={href}
-        className="animate-pulse-glow box-border flex h-14 min-h-14 w-[250px] md:w-full max-w-[min(var(--hero-cta-max-w),calc(var(--hero-vw)-2rem))] items-center justify-center rounded-[16px] border-2 border-[#232323] bg-[#FFBE3B] px-3 py-2 text-inherit no-underline uppercase leading-none transition-[filter] hover:brightness-[0.97] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#232323] sm:h-[min(calc(var(--hero-vw)*0.0479),var(--hero-cta-max-h))] sm:min-h-0 sm:max-w-[var(--hero-cta-max-w)] sm:rounded-[20px] sm:py-0 sm:px-0"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="animate-pulse-glow box-border flex h-14 min-h-14 w-[240px] md:w-full max-w-[min(calc(var(--hero-cta-max-w)*1.3),calc(var(--hero-vw)-2rem))] items-center justify-center rounded-[16px] border-2 border-[#232323] bg-[#FFBE3B] px-3 py-2 text-inherit no-underline uppercase leading-none transition-[filter] hover:brightness-[0.97] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#232323] sm:h-[min(calc(var(--hero-vw)*0.0479),var(--hero-cta-max-h))] sm:min-h-0 sm:max-w-[calc(var(--hero-cta-max-w)*1.3)] sm:rounded-[20px] sm:py-0 sm:px-0"
       >
         <ShadowText
           className="header-nav-font header-nav-font--cta"
           style={ctaGlyphStyle}
         >
-          Cadastre-se
+          Garanta seu ingresso
         </ShadowText>
       </Link>
     </motion.div>

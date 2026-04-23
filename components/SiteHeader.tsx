@@ -24,9 +24,17 @@ export function SiteHeader() {
           <Link href="/#local" className={navLinkClass}>
             <ShadowText className="header-nav-font">Local</ShadowText>
           </Link>
-          <Link href={SIGNUP_ROUTE} className={ctaClass}>
-            <ShadowText className="header-nav-font header-nav-font--cta">
-              Cadastre-se
+          <Link
+            href={SIGNUP_ROUTE}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={ctaClass}
+          >
+            <ShadowText
+              className="header-nav-font header-nav-font--cta"
+              style={{ whiteSpace: "nowrap" }}
+            >
+              Compre aqui
             </ShadowText>
           </Link>
         </nav>

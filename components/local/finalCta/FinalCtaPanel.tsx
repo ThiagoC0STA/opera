@@ -11,10 +11,11 @@ import { SIGNUP_ROUTE } from "@/lib/signupRoute";
 const finalCtaGlyphStyle = {
   ...HEADER_GLYPH_STYLE,
   color: "#FFFFFF",
-  fontSize: "35px",
-  lineHeight: "57px",
+  fontSize: "clamp(14px, 3.6vw, 20px)",
+  lineHeight: 1.1,
   letterSpacing: "0",
   leadingTrim: "none",
+  textAlign: "center",
 } as CSSProperties;
 
 const CTA_HREF = process.env.NEXT_PUBLIC_FINAL_CTA_URL ?? SIGNUP_ROUTE;
@@ -60,15 +61,17 @@ export function FinalCtaPanel({ className = "" }: { className?: string }) {
           variants={fadeUp}
         >
           Garanta seu lugar na Arena Ópera, a melhor festa da Copa do Mundo
-          2026 em Curitiba! Cadastre-se agora mesmo na pré-venda e garanta
-          benefícios exclusivos antes que os ingressos esgotem.
+          2026 em Curitiba! Compre seu ingresso agora mesmo e garanta
+          benefícios exclusivos antes que os lotes esgotem.
         </motion.p>
         <motion.div className="mt-9 sm:mt-10" variants={fadeUp}>
           <Link
             href={CTA_HREF}
-            className="animate-pulse-glow box-border inline-flex h-[69px] w-[min(323px,calc(100%-1.5rem))] max-w-full shrink-0 items-center justify-center rounded-[20px] border-2 border-solid border-[#232323] bg-[#FFBE3B] text-white no-underline transition-[filter] hover:brightness-[1.05] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#232323]"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="animate-pulse-glow box-border inline-flex h-[69px] w-[min(323px,calc(100%-1.5rem))] max-w-full shrink-0 items-center justify-center rounded-[20px] border-2 border-solid border-[#232323] bg-[#FFBE3B] text-white no-underline transition-[filter] hover:brightness-[1.05] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#232323] px-4"
           >
-            <ShadowText style={finalCtaGlyphStyle}>CADASTRE-SE</ShadowText>
+            <ShadowText style={finalCtaGlyphStyle}>COMPRE SEU INGRESSO E NÃO FIQUE DE FORA…</ShadowText>
           </Link>
         </motion.div>
       </motion.div>

@@ -46,7 +46,7 @@ const siteUrl =
 
 const ogTitle = "Arena Ópera · Festas da Copa do Mundo 2026 em Curitiba";
 const ogDescription =
-  "Viva os jogos do Brasil na Copa 2026 com festas épicas no Ópera Concept Hall em Curitiba. Telão LED 8×5m, Baile do Jô, Wood's e mais. 13 e 19 de junho. Cadastre-se na pré-venda!";
+  "Viva os jogos do Brasil na Copa 2026 com festas épicas no Ópera Concept Hall em Curitiba. Telão LED 8×5m, Baile do Jô, Wood's e mais. 13 e 19 de junho. Garanta seu ingresso!";
 const brandLogoPath = "/arena-opera.png";
 
 export const metadata: Metadata = {

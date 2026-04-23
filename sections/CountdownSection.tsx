@@ -18,10 +18,11 @@ const COUNTDOWN_TARGET_ISO = "2026-06-13T17:00:00-03:00";
 const countdownCtaLabelStyle = {
   ...HEADER_GLYPH_STYLE,
   color: "#FFFFFF",
-  fontSize: "35px",
-  lineHeight: "57px",
+  fontSize: "clamp(18px, 4.8vw, 26px)",
+  lineHeight: 1,
   letterSpacing: "0",
   leadingTrim: "none",
+  whiteSpace: "nowrap",
 } as CSSProperties;
 
 type CountBlockProps = {
@@ -157,9 +158,8 @@ export function CountdownSection() {
             variants={fadeUp}
           >
             Faltam poucos dias para a Arena Ópera dominar Curitiba com as
-            melhores festas da Copa do Mundo 2026. Garanta agora sua entrada na
-            pré-venda exclusiva e assegure seu lugar no Ópera Concept Hall antes
-            que o lote vire.
+            melhores festas da Copa do Mundo 2026. Garanta agora seu ingresso e
+            assegure seu lugar no Ópera Concept Hall antes que o lote vire.
           </motion.p>
         </motion.div>
 
@@ -203,9 +203,11 @@ export function CountdownSection() {
         >
           <Link
             href={SIGNUP_ROUTE}
-            className="animate-pulse-glow box-border inline-flex h-[69px] w-[min(323px,calc(100%-1.5rem))] max-w-full shrink-0 items-center justify-center rounded-[20px] border-2 border-solid border-[#232323] bg-[#00A651] text-white transition-[filter] hover:brightness-[1.05] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#232323] no-underline"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="animate-pulse-glow box-border inline-flex h-[69px] w-[min(323px,calc(100%-1.5rem))] max-w-full shrink-0 items-center justify-center rounded-[20px] border-2 border-solid border-[#232323] bg-[#00A651] text-white transition-[filter] hover:brightness-[1.05] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#232323] no-underline px-4"
           >
-            <ShadowText style={countdownCtaLabelStyle}>CADASTRE-SE</ShadowText>
+            <ShadowText style={countdownCtaLabelStyle}>GARANTA SEU INGRESSO</ShadowText>
           </Link>
         </motion.div>
       </div>

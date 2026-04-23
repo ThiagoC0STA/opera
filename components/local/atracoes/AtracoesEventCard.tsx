@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import type { CSSProperties } from "react";
 import { fadeUp } from "@/components/motion/presets";
+import { TICKET_URL_JO, TICKET_URL_WOODS } from "@/lib/signupRoute";
 
 const ASSET = "/final-elements/atracoes";
 
@@ -26,6 +28,8 @@ export type AtracoesEventCardProps = {
   lines: string[];
   /** Optional extra classes on the image (box size is fixed for all cards). */
   imageClassName?: string;
+  /** External ticket URL — if present, the whole card becomes a clickable link. */
+  ticketUrl?: string;
 };
 
 /** Same viewport for every attraction icon so PNG/SVG scale consistently. */
@@ -76,6 +80,7 @@ export function AtracoesEventCard({
   title,
   lines,
   imageClassName = "",
+  ticketUrl,
 }: AtracoesEventCardProps) {
   const bottomBg =
     bottomTone === "green" ? "bg-[#00A651]" : "bg-white";
@@ -85,60 +90,90 @@ export function AtracoesEventCard({
   const cardRotateDeg =
     index % 2 === 0 ? -CARD_TILT_DEG : CARD_TILT_DEG;
 
+  const articleClass =
+    "box-border flex flex-col overflow-hidden rounded-[16px] border-4 border-solid border-[#0A0A0A] bg-white";
+
+  const inner = (
+    <>
+      <div className="relative box-border border-0 border-b-4 border-solid border-[#0A0A0A] bg-[#FFBE3B]">
+        <div
+          className="pointer-events-none absolute inset-x-0 top-1/2 bottom-0 z-2"
+          style={YELLOW_PANEL_BOTTOM_HALF_GRADIENT}
+          aria-hidden
+        />
+        {dateBadge ? (
+          <div
+            className="absolute right-[10px] top-[14px] z-3 box-border flex h-[65px] w-[103px] items-center justify-center rounded-[8px] border-[3px] border-solid border-[#0A0A0A] bg-white shadow-[4px_4px_0_#0A0A0A] sm:right-3 sm:top-4"
+            style={{ transform: "rotate(1.97deg)" }}
+          >
+            <span className="text-[#0A0A0A]" style={dateBadgeTextStyle}>
+              {dateBadge}
+            </span>
+          </div>
+        ) : null}
+        <div className="relative z-1 flex items-center justify-center px-4 pb-10 pt-14 sm:pb-12 sm:pt-16">
+          <div className={TOP_ICON_BOX}>
+            <Image
+              src={topImageSrc}
+              alt={topImageAlt}
+              fill
+              sizes="(max-width: 640px) 200px, 220px"
+              unoptimized={/\.svg(\?|$)/i.test(topImageSrc)}
+              className={`object-contain object-center ${imageClassName}`.trim()}
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className={`box-border border-0 px-4 py-5 sm:px-5 sm:py-6 ${bottomBg}`}
+      >
+        <h3 className="m-0" style={{ ...titleStyle, color: titleColor }}>
+          {title}
+        </h3>
+        <div className="mt-1 space-y-1">
+          {lines.map((line) => (
+            <p
+              key={line}
+              className="m-0"
+              style={{ ...lineStyle, color: lineColor }}
+            >
+              {line}
+            </p>
+          ))}
+          {ticketUrl ? (
+            <p
+              className="m-0 mt-2"
+              style={{ ...lineStyle, color: lineColor, fontWeight: 700 }}
+            >
+              Garanta seu ingresso →
+            </p>
+          ) : null}
+        </div>
+      </div>
+    </>
+  );
+
   return (
     <motion.div variants={fadeUp} className="mx-auto w-full max-w-[336px]">
-      <article
-        className="box-border flex flex-col overflow-hidden rounded-[16px] border-4 border-solid border-[#0A0A0A] bg-white"
-        style={{ transform: `rotate(${cardRotateDeg}deg)` }}
-      >
-        <div className="relative box-border border-0 border-b-4 border-solid border-[#0A0A0A] bg-[#FFBE3B]">
-          <div
-            className="pointer-events-none absolute inset-x-0 top-1/2 bottom-0 z-2"
-            style={YELLOW_PANEL_BOTTOM_HALF_GRADIENT}
-            aria-hidden
-          />
-          {dateBadge ? (
-            <div
-              className="absolute right-[10px] top-[14px] z-3 box-border flex h-[65px] w-[103px] items-center justify-center rounded-[8px] border-[3px] border-solid border-[#0A0A0A] bg-white shadow-[4px_4px_0_#0A0A0A] sm:right-3 sm:top-4"
-              style={{ transform: "rotate(1.97deg)" }}
-            >
-              <span className="text-[#0A0A0A]" style={dateBadgeTextStyle}>
-                {dateBadge}
-              </span>
-            </div>
-          ) : null}
-          <div className="relative z-1 flex items-center justify-center px-4 pb-10 pt-14 sm:pb-12 sm:pt-16">
-            <div className={TOP_ICON_BOX}>
-              <Image
-                src={topImageSrc}
-                alt={topImageAlt}
-                fill
-                sizes="(max-width: 640px) 200px, 220px"
-                unoptimized={/\.svg(\?|$)/i.test(topImageSrc)}
-                className={`object-contain object-center ${imageClassName}`.trim()}
-              />
-            </div>
-          </div>
-        </div>
-        <div
-          className={`box-border border-0 px-4 py-5 sm:px-5 sm:py-6 ${bottomBg}`}
+      {ticketUrl ? (
+        <Link
+          href={ticketUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${title} — garanta seu ingresso`}
+          className={`${articleClass} no-underline text-inherit transition-transform hover:scale-[1.02] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#232323]`}
+          style={{ transform: `rotate(${cardRotateDeg}deg)` }}
         >
-          <h3 className="m-0" style={{ ...titleStyle, color: titleColor }}>
-            {title}
-          </h3>
-          <div className="mt-1 space-y-1">
-            {lines.map((line) => (
-              <p
-                key={line}
-                className="m-0"
-                style={{ ...lineStyle, color: lineColor }}
-              >
-                {line}
-              </p>
-            ))}
-          </div>
-        </div>
-      </article>
+          {inner}
+        </Link>
+      ) : (
+        <article
+          className={articleClass}
+          style={{ transform: `rotate(${cardRotateDeg}deg)` }}
+        >
+          {inner}
+        </article>
+      )}
     </motion.div>
   );
 }
@@ -153,6 +188,7 @@ export const atracoesJo = {
     "Brasil x Marrocos",
     "Dia 13 de junho a partir das 17h",
   ],
+  ticketUrl: TICKET_URL_JO,
 };
 
 export const atracoesWoods = {
@@ -162,6 +198,7 @@ export const atracoesWoods = {
   bottomTone: "green" as const,
   title: "Wood's",
   lines: ["Brasil x Haiti", "Dia 19 de junho a partir das 19h"],
+  ticketUrl: TICKET_URL_WOODS,
 };
 
 export const atracoesMore = {
